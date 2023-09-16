@@ -7,6 +7,10 @@
 <body>
 <h1>Вход</h1>
 <form th:action="@{/login}" method="post">
+    <!--/*@thymesVar id="errorMessage" type="String"*/-->
+    <div th:if="${errorMessage != null}">
+        <p th:text="${errorMessage}"></p>
+    </div>
     <label for="username">Имя пользователя:</label>
     <input type="text" id="username" name="username" required><br><br>
 

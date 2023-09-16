@@ -11,7 +11,7 @@ public class UserDao extends EntityDao<User, Integer> {
     }
 
     public User getByUsername(String username) {
-        return session.createQuery("FROM User WHERE username = :username", User.class)
+        return session.createQuery("FROM User WHERE lower(username) = lower(:username)", User.class)
                 .setParameter("username", username)
                 .uniqueResult();
     }

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class SessionDao extends EntityDao<Session, UUID> {
-    public SessionDao(org.hibernate.Session session, Class<Session> entityClass) {
-        super(session, entityClass);
+    public SessionDao(org.hibernate.Session session) {
+        super(session, Session.class);
     }
 
     @Override

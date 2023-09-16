@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Вход</title>
 </head>
 <body>
 <h1>Вход</h1>
+<div th:if="${errorMessage != null}">
+    <p th:text="${errorMessage}"></p>
+</div>
 <form th:action="@{/login}" method="post">
-    <!--/*@thymesVar id="errorMessage" type="String"*/-->
-    <div th:if="${errorMessage != null}">
-        <p th:text="${errorMessage}"></p>
-    </div>
+
     <label for="username">Имя пользователя:</label>
     <input type="text" id="username" name="username" required><br><br>
 

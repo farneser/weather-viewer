@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
 </head>
 <body>
 <h1>Регистрация</h1>
-<!--/*@thymesVar id="errorMessage" type="String"*/-->
 <div th:if="${errorMessage != null}">
     <p th:text="${errorMessage}"></p>
 </div>

@@ -1,8 +1,11 @@
 package com.farneser.weatherviewer.helpers.factory;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
@@ -23,5 +26,12 @@ public abstract class ThymeleafFactory {
         templateEngine.setTemplateResolver(templateResolver);
 
         instance = templateEngine;
+    }
+
+    public static WebContext buildWebContext(HttpServletRequest req, HttpServletResponse resp, ServletContext servletContext) {
+        var application = JakartaServletWebApplication.buildApplication(servletContext);
+        var webExchange = application.buildExchange(req, resp);
+
+        return new WebContext(webExchange);
     }
 }

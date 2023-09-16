@@ -1,7 +1,8 @@
-package com.farneser.weatherviewer.factory;
+package com.farneser.weatherviewer.helpers.factory;
 
 import com.farneser.weatherviewer.dto.LoginDto;
 import com.farneser.weatherviewer.dto.RegisterDto;
+import com.farneser.weatherviewer.helpers.parser.ParameterParser;
 import jakarta.servlet.http.HttpServletRequest;
 
 public abstract class UserDtoFactory {

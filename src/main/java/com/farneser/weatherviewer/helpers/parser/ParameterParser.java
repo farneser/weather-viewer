@@ -1,4 +1,4 @@
-package com.farneser.weatherviewer.factory;
+package com.farneser.weatherviewer.helpers.parser;
 
 
 import jakarta.servlet.http.HttpServletRequest;

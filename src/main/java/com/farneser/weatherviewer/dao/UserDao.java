@@ -1,6 +1,5 @@
 package com.farneser.weatherviewer.dao;
 
-import com.farneser.weatherviewer.models.Location;
 import com.farneser.weatherviewer.models.User;
 import org.hibernate.Session;
 

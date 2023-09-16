@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Вход</title>
@@ -9,13 +9,13 @@
 <div th:if="${errorMessage != null}">
     <p th:text="${errorMessage}"></p>
 </div>
-<form th:action="@{/login}" method="post">
+<form method="post" th:action="@{/login}">
 
     <label for="username">Имя пользователя:</label>
-    <input type="text" id="username" name="username" required><br><br>
+    <input id="username" name="username" required type="text"><br><br>
 
     <label for="password">Пароль:</label>
-    <input type="password" id="password" name="password" required><br><br>
+    <input id="password" name="password" required type="password"><br><br>
 
     <input type="submit" value="Войти">
 </form>

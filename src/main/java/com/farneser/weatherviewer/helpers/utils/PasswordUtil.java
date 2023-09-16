@@ -32,7 +32,7 @@ public abstract class PasswordUtil {
         }
     }
 
-    public static boolean isPasswordCorrect(String password, String hash){
+    public static boolean isPasswordCorrect(String password, String hash) {
         return Objects.equals(hashPassword(password), hash);
     }
 }

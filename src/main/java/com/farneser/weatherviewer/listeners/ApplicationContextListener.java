@@ -16,6 +16,8 @@ public class ApplicationContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("Start");
 
+        HibernateFactory.build();
+
         ThymeleafFactory.build(sce.getServletContext());
     }
 

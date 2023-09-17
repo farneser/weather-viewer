@@ -34,12 +34,12 @@ public abstract class BaseServlet extends HttpServlet {
     }
 
     protected UUID getSessionId(HttpServletRequest request) {
-        var cookie = findCookieByName(request.getCookies(), "sessionId");
+        var cookie = findSessionCookie(request.getCookies());
 
         return cookie.map(value -> UUID.fromString(value.getValue())).orElse(null);
     }
 
-    protected static Optional<Cookie> findCookieByName(Cookie[] cookies, String cookieName) {
+    private static Optional<Cookie> findSessionCookie(Cookie[] cookies) {
         if (cookies == null || cookies.length == 0) {
             return Optional.empty();
         }
@@ -48,7 +48,7 @@ public abstract class BaseServlet extends HttpServlet {
                 .stream(cookies)
                 .filter(cookie -> cookie
                         .getName()
-                        .equals(cookieName))
+                        .equals("sessionId"))
                 .findFirst();
     }
 }

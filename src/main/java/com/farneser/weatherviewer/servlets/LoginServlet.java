@@ -45,6 +45,8 @@ public class LoginServlet extends BaseServlet {
 
         var sessionDao = new SessionDao(HibernateFactory.getSessionFactory().openSession());
 
+        sessionDao.cleanUserSessions(user.getId());
+
         var session = SessionUtil.build(user);
 
         session = sessionDao.create(session);

@@ -16,7 +16,7 @@ public abstract class EntityDao<T, K> {
         this.entityClass = entityClass;
     }
 
-    public void create(T entity) {
+    public T create(T entity) {
         var session = HibernateFactory.getSessionFactory().openSession();
 
         Transaction transaction = null;
@@ -24,9 +24,11 @@ public abstract class EntityDao<T, K> {
         try {
             transaction = session.beginTransaction();
 
-            session.merge(entity);
+            var result = session.merge(entity);
 
             transaction.commit();
+
+            return result;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -40,6 +42,8 @@ public abstract class EntityDao<T, K> {
     }
 
     public T getById(K id) {
+        var session = HibernateFactory.getSessionFactory().openSession();
+
         return session.get(entityClass, id);
     }
 

@@ -3,7 +3,6 @@ package com.farneser.weatherviewer.servlets;
 import com.farneser.weatherviewer.helpers.factory.ThymeleafFactory;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,8 +10,6 @@ import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Optional;
 import java.util.UUID;
 
 public abstract class BaseServlet extends HttpServlet {

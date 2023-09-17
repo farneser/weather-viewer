@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
+.idea/inspectionProfiles/Project_Default.xml
 .idea/uiDesigner.xml
 .idea/dataSources.xml
 .idea/modules.xml

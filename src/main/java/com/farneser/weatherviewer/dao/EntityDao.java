@@ -1,7 +1,10 @@
 package com.farneser.weatherviewer.dao;
 
+import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class EntityDao<T, K> {
@@ -14,9 +17,26 @@ public abstract class EntityDao<T, K> {
     }
 
     public void create(T entity) {
-        var transaction = session.beginTransaction();
-        session.persist(entity);
-        transaction.commit();
+        var session = HibernateFactory.getSessionFactory().openSession();
+
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            session.merge(entity);
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            System.out.println(e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace()));
+
+            throw new RuntimeException(e);
+        }
     }
 
     public T getById(K id) {

@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebListener;
 
 import java.util.logging.Logger;
 
-@WebListener
+@WebListener("/")
 public class ApplicationContextListener implements ServletContextListener {
     private final Logger logger = Logger.getLogger(ApplicationContextListener.class.getName());
 

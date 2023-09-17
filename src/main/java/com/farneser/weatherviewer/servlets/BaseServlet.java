@@ -34,21 +34,18 @@ public abstract class BaseServlet extends HttpServlet {
     }
 
     protected UUID getSessionId(HttpServletRequest request) {
-        var cookie = findSessionCookie(request.getCookies());
+        var cookies = request.getCookies();
 
-        return cookie.map(value -> UUID.fromString(value.getValue())).orElse(null);
-    }
-
-    private static Optional<Cookie> findSessionCookie(Cookie[] cookies) {
-        if (cookies == null || cookies.length == 0) {
-            return Optional.empty();
+        if (cookies == null) {
+            return null;
         }
 
-        return Arrays
-                .stream(cookies)
-                .filter(cookie -> cookie
-                        .getName()
-                        .equals("sessionId"))
-                .findFirst();
+        for (var c : cookies) {
+            if (c.getName().equals("sessionId")) {
+                return UUID.fromString(c.getValue());
+            }
+        }
+
+        return null;
     }
 }

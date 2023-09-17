@@ -20,8 +20,8 @@ public class AuthServlet extends BaseServlet {
 
         if (session != null && session.getExpiresAt().getTime() > new Date().getTime()) {
             super.service(req, resp);
+        } else {
+            resp.sendRedirect("login");
         }
-
-        templateEngine.process("login", context, resp.getWriter());
     }
 }

@@ -5,14 +5,12 @@ import com.farneser.weatherviewer.models.User;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 
 public abstract class SessionUtil {
 
     public static Session build(User user) {
         var session = new Session();
 
-        session.setId(UUID.randomUUID());
         session.setUser(user);
 
         var calendar = Calendar.getInstance();

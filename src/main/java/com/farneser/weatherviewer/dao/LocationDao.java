@@ -11,6 +11,6 @@ public class LocationDao extends EntityDao<Location, Integer> {
     }
 
     public List<Location> get() {
-        return session.createQuery("FROM Location", Location.class).list();
+        return session.createSelectionQuery("FROM Location", Location.class).list();
     }
 }

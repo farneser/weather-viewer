@@ -11,13 +11,13 @@ public class UserDao extends EntityDao<User, Integer> {
     }
 
     public User getByUsername(String username) {
-        return session.createQuery("FROM User WHERE lower(username) = lower(:username)", User.class)
+        return session.createSelectionQuery("FROM User WHERE lower(username) = lower(:username)", User.class)
                 .setParameter("username", username)
                 .uniqueResult();
     }
 
     @Override
     public List<User> get() {
-        return session.createQuery("FROM User", User.class).list();
+        return session.createSelectionQuery("FROM User", User.class).list();
     }
 }

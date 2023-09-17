@@ -12,6 +12,6 @@ public class SessionDao extends EntityDao<Session, UUID> {
 
     @Override
     public List<Session> get() {
-        return session.createQuery("FROM Session", Session.class).list();
+        return session.createSelectionQuery("FROM Session", Session.class).list();
     }
 }

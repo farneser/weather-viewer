@@ -28,7 +28,6 @@ public class LoginServlet extends BaseServlet {
         var loginDto = UserDtoFactory.getLogin(request);
 
         var userDao = new UserDao(HibernateFactory.getSessionFactory().openSession());
-        var sessionDao = new SessionDao(HibernateFactory.getSessionFactory().openSession());
 
         User user = null;
 
@@ -44,9 +43,11 @@ public class LoginServlet extends BaseServlet {
             return;
         }
 
+        var sessionDao = new SessionDao(HibernateFactory.getSessionFactory().openSession());
+
         var session = SessionUtil.build(user);
 
-        sessionDao.create(session);
+        session = sessionDao.create(session);
 
         var cookie = new Cookie("sessionId", session.getId().toString());
 

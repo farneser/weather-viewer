@@ -3,11 +3,8 @@ package com.farneser.weatherviewer.dao.user;
 import com.farneser.weatherviewer.dao.EntityDaoMock;
 import com.farneser.weatherviewer.models.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserDaoMock extends EntityDaoMock<User, Integer> implements IUserDao {
-    private static final ArrayList<User> userData = new ArrayList<>();
+    private static int counter = 0;
 
     @Override
     public User getByUsername(String username) {
@@ -20,24 +17,9 @@ public class UserDaoMock extends EntityDaoMock<User, Integer> implements IUserDa
     }
 
     @Override
-    public User getById(Integer id) {
+    protected Integer generateNewId() {
+        counter++;
 
-        for (var user : get()) {
-            if (user.getId() == id) {
-                return user;
-            }
-        }
-
-        return null;
-    }
-
-    @Override
-    public void delete(Integer id) {
-        get().removeIf(user -> user.getId() == id);
-    }
-
-    @Override
-    public List<User> get() {
-        return userData;
+        return counter;
     }
 }

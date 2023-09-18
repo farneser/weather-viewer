@@ -1,11 +1,20 @@
 package com.farneser.weatherviewer.servlets;
 
+import com.farneser.weatherviewer.dao.session.ISessionDao;
+import com.farneser.weatherviewer.dao.session.SessionDao;
+import com.farneser.weatherviewer.dao.user.IUserDao;
+import com.farneser.weatherviewer.dao.user.UserDao;
 import com.farneser.weatherviewer.helpers.factory.ThymeleafFactory;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jdk.jfr.DataAmount;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -15,6 +24,17 @@ import java.util.UUID;
 public abstract class BaseServlet extends HttpServlet {
     protected static final String authCookieName = "sessionId";
     protected WebContext context;
+
+    @Getter
+    @Setter
+    protected ISessionDao sessionDao = new SessionDao();
+
+    @Getter
+    @Setter
+    protected IUserDao userDao = new UserDao();
+
+    @Getter
+    @Setter
     protected ITemplateEngine templateEngine;
 
     @Override

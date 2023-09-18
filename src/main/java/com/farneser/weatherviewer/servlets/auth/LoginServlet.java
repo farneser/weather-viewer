@@ -1,8 +1,5 @@
 package com.farneser.weatherviewer.servlets.auth;
 
-import com.farneser.weatherviewer.dao.SessionDao;
-import com.farneser.weatherviewer.dao.UserDao;
-import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
 import com.farneser.weatherviewer.helpers.factory.UserDtoFactory;
 import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
 import com.farneser.weatherviewer.helpers.utils.SessionUtil;
@@ -28,8 +25,6 @@ public class LoginServlet extends BaseServlet {
             throws IOException {
         var loginDto = UserDtoFactory.getLogin(request);
 
-        var userDao = new UserDao(HibernateFactory.getSessionFactory().openSession());
-
         User user = null;
 
         if (loginDto.getUsername() != null) {
@@ -44,8 +39,6 @@ public class LoginServlet extends BaseServlet {
             return;
         }
 
-        var sessionDao = new SessionDao(HibernateFactory.getSessionFactory().openSession());
-
         sessionDao.cleanUserSessions(user.getId());
 
         var session = SessionUtil.build(user);
@@ -58,6 +51,6 @@ public class LoginServlet extends BaseServlet {
 
         response.addCookie(cookie);
 
-        response.sendRedirect("");
+        response.sendRedirect(request.getContextPath());
     }
 }

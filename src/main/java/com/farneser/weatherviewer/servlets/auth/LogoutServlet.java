@@ -1,7 +1,5 @@
 package com.farneser.weatherviewer.servlets.auth;
 
-import com.farneser.weatherviewer.dao.SessionDao;
-import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
 import com.farneser.weatherviewer.servlets.BaseServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -15,8 +13,6 @@ public class LogoutServlet extends BaseServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-        var sessionDao = new SessionDao(HibernateFactory.getSessionFactory().openSession());
 
         var cookies = req.getCookies();
 

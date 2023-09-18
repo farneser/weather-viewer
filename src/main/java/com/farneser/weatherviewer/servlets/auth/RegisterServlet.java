@@ -1,7 +1,5 @@
 package com.farneser.weatherviewer.servlets.auth;
 
-import com.farneser.weatherviewer.dao.UserDao;
-import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
 import com.farneser.weatherviewer.helpers.factory.UserDtoFactory;
 import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
 import com.farneser.weatherviewer.models.User;
@@ -25,8 +23,6 @@ public class RegisterServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         var registerDto = UserDtoFactory.getRegister(request);
-
-        var userDao = new UserDao(HibernateFactory.getSessionFactory().openSession());
 
         if (registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
 

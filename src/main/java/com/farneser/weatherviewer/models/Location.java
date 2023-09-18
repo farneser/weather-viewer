@@ -10,7 +10,7 @@ public class Location implements IEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String name;

@@ -8,11 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class EntityDao<T, K> {
-    protected final Session session;
     protected final Class<T> entityClass;
 
-    public EntityDao(Session session, Class<T> entityClass) {
-        this.session = session;
+    public EntityDao(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
@@ -48,6 +46,8 @@ public abstract class EntityDao<T, K> {
     }
 
     public void delete(K id) {
+        var session = HibernateFactory.getSessionFactory().openSession();
+
         var transaction = session.beginTransaction();
         var entity = getById(id);
 
@@ -57,6 +57,4 @@ public abstract class EntityDao<T, K> {
 
         transaction.commit();
     }
-
-    public abstract List<T> get();
 }

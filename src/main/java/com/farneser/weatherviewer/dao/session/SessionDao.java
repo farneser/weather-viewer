@@ -1,22 +1,27 @@
-package com.farneser.weatherviewer.dao;
+package com.farneser.weatherviewer.dao.session;
 
+import com.farneser.weatherviewer.dao.EntityDao;
+import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
 import com.farneser.weatherviewer.models.Session;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class SessionDao extends EntityDao<Session, UUID> {
-    public SessionDao(org.hibernate.Session session) {
-        super(session, Session.class);
+public class SessionDao extends EntityDao<Session, UUID> implements ISessionDao {
+    public SessionDao() {
+        super(Session.class);
     }
 
-    @Override
     public List<Session> get() {
+        var session = HibernateFactory.getSessionFactory().openSession();
+
         return session.createSelectionQuery("FROM Session", Session.class).list();
     }
 
     public void cleanUserSessions(int userId) {
+        var session = HibernateFactory.getSessionFactory().openSession();
+
         var transaction = session.beginTransaction();
 
         try {
@@ -24,7 +29,7 @@ public class SessionDao extends EntityDao<Session, UUID> {
                     .setParameter("userId", userId)
                     .list();
 
-            for (var sessionToDelete: sessionsToDelete){
+            for (var sessionToDelete : sessionsToDelete) {
                 session.remove(sessionToDelete);
             }
 

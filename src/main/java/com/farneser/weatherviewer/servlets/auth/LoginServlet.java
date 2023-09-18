@@ -1,4 +1,4 @@
-package com.farneser.weatherviewer.servlets;
+package com.farneser.weatherviewer.servlets.auth;
 
 import com.farneser.weatherviewer.dao.SessionDao;
 import com.farneser.weatherviewer.dao.UserDao;
@@ -7,6 +7,7 @@ import com.farneser.weatherviewer.helpers.factory.UserDtoFactory;
 import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
 import com.farneser.weatherviewer.helpers.utils.SessionUtil;
 import com.farneser.weatherviewer.models.User;
+import com.farneser.weatherviewer.servlets.BaseServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,12 +52,12 @@ public class LoginServlet extends BaseServlet {
 
         session = sessionDao.create(session);
 
-        var cookie = new Cookie("sessionId", session.getId().toString());
+        var cookie = new Cookie(authCookieName, session.getId().toString());
 
         cookie.setMaxAge((int) ((session.getExpiresAt().getTime() - System.currentTimeMillis()) / 1000));
 
         response.addCookie(cookie);
 
-        response.sendRedirect("/dashboard");
+        response.sendRedirect("");
     }
 }

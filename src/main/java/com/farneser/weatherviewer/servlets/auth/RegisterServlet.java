@@ -1,10 +1,11 @@
-package com.farneser.weatherviewer.servlets;
+package com.farneser.weatherviewer.servlets.auth;
 
 import com.farneser.weatherviewer.dao.UserDao;
 import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
 import com.farneser.weatherviewer.helpers.factory.UserDtoFactory;
 import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
 import com.farneser.weatherviewer.models.User;
+import com.farneser.weatherviewer.servlets.BaseServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

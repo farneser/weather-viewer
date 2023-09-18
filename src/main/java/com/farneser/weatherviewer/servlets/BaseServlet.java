@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public abstract class BaseServlet extends HttpServlet {
+    protected static final String authCookieName = "sessionId";
     protected WebContext context;
     protected ITemplateEngine templateEngine;
 
@@ -38,7 +39,7 @@ public abstract class BaseServlet extends HttpServlet {
         }
 
         for (var c : cookies) {
-            if (c.getName().equals("sessionId")) {
+            if (c.getName().equals(authCookieName)) {
                 return UUID.fromString(c.getValue());
             }
         }

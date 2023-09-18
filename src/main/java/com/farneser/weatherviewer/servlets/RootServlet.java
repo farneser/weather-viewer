@@ -1,5 +1,6 @@
 package com.farneser.weatherviewer.servlets;
 
+import com.farneser.weatherviewer.servlets.auth.AuthServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

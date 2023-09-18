@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "Sessions")
-public class Session {
+public class Session implements IEntity<UUID> {
     @Id
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false)

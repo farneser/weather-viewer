@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tomcat server" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.12" ALTERNATIVE_JRE_ENABLED="false">
     <option name="OPEN_IN_BROWSER" value="false" />
+    <option name="UPDATING_POLICY" value="redeploy-artifacts" />
     <deployment>
       <artifact name="weather-viewer:war exploded">
         <settings>
@@ -101,6 +102,11 @@
       <EnvironmentVariables>
         <option name="NAME" value="WEATHER_DB_NAME_ENV_VARIABLE" />
         <option name="VALUE" value="weather-viewer" />
+        <option name="IS_PREDEFINED" value="false" />
+      </EnvironmentVariables>
+      <EnvironmentVariables>
+        <option name="NAME" value="OPENWEATHERMAP_APIKEY_ENV_VARIABLE" />
+        <option name="VALUE" value="your_api_key" />
         <option name="IS_PREDEFINED" value="false" />
       </EnvironmentVariables>
     </ConfigurationWrapper>

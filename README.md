@@ -16,6 +16,7 @@ PORT_ENV_VARIABLE=5432
 WEATHER_DB_NAME_ENV_VARIABLE=weather-viewer
 USERNAME_ENV_VARIABLE=postgres
 PASSWORD_ENV_VARIABLE=postgres
+WEATHER_DB_NAME_ENV_VARIABLE=your_api_key
 ```
 
 ### Запуск через Intellij Idea

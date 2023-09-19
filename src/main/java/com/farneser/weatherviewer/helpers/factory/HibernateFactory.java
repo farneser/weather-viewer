@@ -12,7 +12,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-public class HibernateFactory {
+public abstract class HibernateFactory {
 
     private final static Logger logger = Logger.getLogger(HibernateFactory.class.getName());
     private static StandardServiceRegistry registry;

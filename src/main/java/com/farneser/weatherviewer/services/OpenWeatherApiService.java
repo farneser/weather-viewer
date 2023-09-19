@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OpenWeatherApiService {
-    private static final ApiUriFactory apiFactory = new ApiUriFactory("https://api.openweathermap.org");
     private final HttpClient client = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -29,7 +28,7 @@ public class OpenWeatherApiService {
     public List<LocationResponse> getLocationsByName(String locationName) {
 
         try {
-            var request = buildRequest(apiFactory.buildDirect(locationName));
+            var request = buildRequest(ApiUriFactory.buildDirect(locationName));
 
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -48,7 +47,7 @@ public class OpenWeatherApiService {
     public WeatherResponse getWeatherByLocation(double lat, double lon) {
         try {
 
-            var request = buildRequest(apiFactory.buildWeather(lat, lon));
+            var request = buildRequest(ApiUriFactory.buildWeather(lat, lon));
 
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 

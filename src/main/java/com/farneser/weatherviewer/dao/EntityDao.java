@@ -1,13 +1,9 @@
 package com.farneser.weatherviewer.dao;
 
 import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
-import com.farneser.weatherviewer.models.User;
-import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public abstract class EntityDao<T, K> {
     protected final Class<T> entityClass;

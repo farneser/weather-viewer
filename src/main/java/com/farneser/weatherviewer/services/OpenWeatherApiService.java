@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class OpenWeatherApiService {
             System.out.println(e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
 
-            return null;
+            return new ArrayList<>();
         }
     }
 }

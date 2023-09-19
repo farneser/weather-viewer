@@ -20,6 +20,7 @@ import java.util.UUID;
 
 public abstract class BaseServlet extends HttpServlet {
     protected static final String authCookieName = "sessionId";
+    @Setter
     protected WebContext context;
 
     @Getter

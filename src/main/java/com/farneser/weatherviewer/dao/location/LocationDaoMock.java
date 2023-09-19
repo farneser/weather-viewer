@@ -12,4 +12,16 @@ public class LocationDaoMock extends EntityDaoMock<Location, Integer> implements
 
         return counter;
     }
+
+    @Override
+    public Location getByCoordinates(double lat, double lon) {
+
+        for (var location : get()) {
+            if (location.getLatitude() == lat && location.getLongitude() == lon) {
+                return location;
+            }
+        }
+
+        return null;
+    }
 }

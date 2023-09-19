@@ -1,5 +1,6 @@
 package com.farneser.weatherviewer.listeners;
 
+import com.farneser.weatherviewer.helpers.factory.ApiUriFactory;
 import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
 import com.farneser.weatherviewer.helpers.factory.ThymeleafFactory;
 import jakarta.servlet.ServletContextEvent;
@@ -17,6 +18,8 @@ public class ApplicationContextListener implements ServletContextListener {
         logger.info("Start");
 
         HibernateFactory.build();
+
+        ApiUriFactory.build(System.getenv("OPENWEATHERMAP_APIKEY_ENV_VARIABLE"));
 
         ThymeleafFactory.build(sce.getServletContext());
     }

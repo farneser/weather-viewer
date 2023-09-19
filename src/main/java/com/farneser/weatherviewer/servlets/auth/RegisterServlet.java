@@ -23,26 +23,30 @@ public class RegisterServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         var registerDto = UserDtoFactory.getRegister(request);
+        try {
+            if (registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
 
-        if (registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
+                try {
+                    var user = new User();
 
-            try {
-                var user = new User();
+                    user.setUsername(registerDto.getUsername());
+                    user.setPassword(PasswordUtil.hashPassword(registerDto.getPassword()));
 
-                user.setUsername(registerDto.getUsername());
-                user.setPassword(PasswordUtil.hashPassword(registerDto.getPassword()));
+                    userDao.create(user);
+                    response.sendRedirect("login");
 
-                userDao.create(user);
-                response.sendRedirect("login");
+                } catch (ConstraintViolationException e) {
+                    context.setVariable("errorMessage", "There is already a user with this name");
+                    templateEngine.process("register", context, response.getWriter());
+                }
 
-            } catch (ConstraintViolationException e) {
+            } else {
                 context.setVariable("errorMessage", "There is already a user with this name");
                 templateEngine.process("register", context, response.getWriter());
             }
 
-        } else {
-            context.setVariable("errorMessage", "There is already a user with this name");
-            templateEngine.process("register", context, response.getWriter());
+        } catch (NullPointerException e) {
+            response.sendRedirect("register");
         }
     }
 }

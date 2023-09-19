@@ -27,7 +27,9 @@ public class LogoutServlet extends BaseServlet {
         }
 
         try {
-            sessionDao.delete(getSessionId(req));
+            var session = sessionDao.getById(getSessionId(req));
+
+            sessionDao.cleanUserSessions(session.getUser().getId());
         } catch (Exception ignored) {
         }
 

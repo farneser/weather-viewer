@@ -32,9 +32,12 @@ public class LoginServlet extends BaseServlet {
         }
 
         if (user == null || !PasswordUtil.isPasswordCorrect(loginDto.getPassword(), user.getPassword())) {
-
-            context.setVariable("errorMessage", "The username or password you entered is incorrect");
-            templateEngine.process("login", context, response.getWriter());
+            try {
+                context.setVariable("errorMessage", "The username or password you entered is incorrect");
+                templateEngine.process("login", context, response.getWriter());
+            } catch (NullPointerException e) {
+                response.sendRedirect("login");
+            }
 
             return;
         }

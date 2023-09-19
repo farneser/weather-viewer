@@ -13,6 +13,7 @@ public class UserDaoMock extends EntityDaoMock<User, Integer> implements IUserDa
                 return user;
             }
         }
+
         return null;
     }
 

@@ -54,6 +54,6 @@ public class LoginServlet extends BaseServlet {
 
         response.addCookie(cookie);
 
-        response.sendRedirect(request.getContextPath());
+        response.sendRedirect("home");
     }
 }

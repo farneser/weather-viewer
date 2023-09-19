@@ -9,6 +9,7 @@
 <div th:if="${errorMessage != null}">
     <p th:text="${errorMessage}"></p>
 </div>
+
 <form method="post" th:action="@{/login}">
 
     <label for="username">Имя пользователя:</label>

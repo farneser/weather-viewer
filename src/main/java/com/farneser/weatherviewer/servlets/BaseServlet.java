@@ -1,5 +1,7 @@
 package com.farneser.weatherviewer.servlets;
 
+import com.farneser.weatherviewer.dao.location.ILocationDao;
+import com.farneser.weatherviewer.dao.location.LocationDao;
 import com.farneser.weatherviewer.dao.session.ISessionDao;
 import com.farneser.weatherviewer.dao.session.SessionDao;
 import com.farneser.weatherviewer.dao.user.IUserDao;
@@ -30,6 +32,10 @@ public abstract class BaseServlet extends HttpServlet {
     @Getter
     @Setter
     protected IUserDao userDao = new UserDao();
+
+    @Getter
+    @Setter
+    protected ILocationDao locationDao = new LocationDao();
 
     @Getter
     @Setter

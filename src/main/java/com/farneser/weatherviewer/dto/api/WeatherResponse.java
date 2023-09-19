@@ -28,12 +28,8 @@ public class WeatherResponse {
     private Sys sys;
     @JsonProperty("timezone")
     private int timezone;
-    @JsonProperty("id")
-    private int id;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("cod")
-    private int cod;
 }
 
 

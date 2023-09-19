@@ -9,9 +9,9 @@ public abstract class UserDtoFactory {
     public static RegisterDto getRegister(HttpServletRequest request) {
         var registerDto = new RegisterDto();
 
-        registerDto.setUsername(ParameterParser.getStringParameter(request, "username"));
-        registerDto.setPassword(ParameterParser.getStringParameter(request, "password"));
-        registerDto.setConfirmPassword(ParameterParser.getStringParameter(request, "confirmPassword"));
+        registerDto.setUsername(ParameterParser.getString(request, "username"));
+        registerDto.setPassword(ParameterParser.getString(request, "password"));
+        registerDto.setConfirmPassword(ParameterParser.getString(request, "confirmPassword"));
 
         return registerDto;
     }
@@ -19,8 +19,8 @@ public abstract class UserDtoFactory {
     public static LoginDto getLogin(HttpServletRequest request) {
         var loginDto = new LoginDto();
 
-        loginDto.setUsername(ParameterParser.getStringParameter(request, "username"));
-        loginDto.setPassword(ParameterParser.getStringParameter(request, "password"));
+        loginDto.setUsername(ParameterParser.getString(request, "username"));
+        loginDto.setPassword(ParameterParser.getString(request, "password"));
 
         return loginDto;
     }

@@ -21,18 +21,30 @@ public class SearchServlet extends AuthServlet {
 
         var search = ParameterParser.getString(request, "location");
 
-        List<LocationResponse> locations = new ArrayList<>();
+        List<LocationResponse> locationsResponse = new ArrayList<>();
 
         if (search != null && !search.isEmpty()) {
-            locations = apiService.getLocationsByName(search);
+            var locations = apiService.getLocationsByName(search);
+
+            locations.forEach(locationResponse -> {
+                var locationByCoordinates = locationDao
+                        .getByCoordinates(
+                                locationResponse.getLatitude(),
+                                locationResponse.getLongitude());
+                if (locationByCoordinates == null) {
+                    locationsResponse.add(locationResponse);
+                }
+            });
         }
 
-        context.setVariable("locations", locations);
+
+        context.setVariable("search", search);
+        context.setVariable("locations", locationsResponse);
         templateEngine.process("search", context, response.getWriter());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         var coordinates = CoordinatesFactory.getCoordinates(req);
 
         var location = locationDao.getByCoordinates(coordinates.getLat(), coordinates.getLon());
@@ -50,9 +62,10 @@ public class SearchServlet extends AuthServlet {
 
             locationDao.create(location);
 
+            resp.sendRedirect("home");
+            return;
         }
 
         templateEngine.process("search", context, resp.getWriter());
-
     }
 }

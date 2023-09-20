@@ -13,44 +13,47 @@ public abstract class EntityDao<T, K> {
     }
 
     public T create(T entity) {
-        var session = HibernateFactory.getSessionFactory().openSession();
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
-        Transaction transaction = null;
+            Transaction transaction = null;
 
-        try {
-            transaction = session.beginTransaction();
+            try {
+                transaction = session.beginTransaction();
 
-            var result = session.merge(entity);
+                var result = session.merge(entity);
 
-            transaction.commit();
+                transaction.commit();
 
-            return result;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
+                return result;
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+
+                System.out.println(e.getMessage());
+                System.out.println(Arrays.toString(e.getStackTrace()));
+
+                throw new RuntimeException(e);
             }
-
-            System.out.println(e.getMessage());
-            System.out.println(Arrays.toString(e.getStackTrace()));
-
-            throw new RuntimeException(e);
         }
     }
 
     public T getById(K id) {
-        var session = HibernateFactory.getSessionFactory().openSession();
-
-        return session.get(entityClass, id);
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
+            return session.get(entityClass, id);
+        }
     }
 
     public void delete(K id) {
-        var session = HibernateFactory.getSessionFactory().openSession();
+        Transaction transaction;
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
-        var transaction = session.beginTransaction();
-        var entity = getById(id);
+            transaction = session.beginTransaction();
+            var entity = getById(id);
 
-        if (entity != null) {
-            session.remove(entity);
+            if (entity != null) {
+                session.remove(entity);
+            }
         }
 
         transaction.commit();

@@ -12,19 +12,32 @@ public class LocationDao extends EntityDao<Location, Integer> implements ILocati
     }
 
     public List<Location> get() {
-        var session = HibernateFactory.getSessionFactory().openSession();
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
-        return session.createSelectionQuery("FROM Location", Location.class).list();
+            return session.createSelectionQuery("FROM Location", Location.class).list();
+        }
     }
 
     @Override
     public Location getByCoordinates(double lat, double lon) {
-        var session = HibernateFactory.getSessionFactory().openSession();
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
-        return session
-                .createSelectionQuery("FROM Location WHERE Location.latitude = :lat AND Location.longitude = :lon", Location.class)
-                .setParameter("lat", lat)
-                .setParameter("lon", lon)
-                .uniqueResult();
+            return session
+                    .createSelectionQuery("FROM Location WHERE latitude = :lat AND longitude = :lon", Location.class)
+                    .setParameter("lat", lat)
+                    .setParameter("lon", lon)
+                    .uniqueResult();
+        }
+    }
+
+    @Override
+    public List<Location> getByUserId(int userId) {
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
+
+            return session
+                    .createSelectionQuery("FROM Location WHERE user.id = :userId", Location.class)
+                    .setParameter("userId", userId)
+                    .list();
+        }
     }
 }

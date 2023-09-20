@@ -12,17 +12,19 @@ public class UserDao extends EntityDao<User, Integer> implements IUserDao {
     }
 
     public User getByUsername(String username) {
-        var session = HibernateFactory.getSessionFactory().openSession();
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
-        return session.createSelectionQuery("FROM User WHERE lower(username) = lower(:username)", User.class)
-                .setParameter("username", username)
-                .uniqueResult();
+            return session.createSelectionQuery("FROM User WHERE lower(username) = lower(:username)", User.class)
+                    .setParameter("username", username)
+                    .uniqueResult();
+        }
     }
 
     @Override
     public List<User> get() {
-        var session = HibernateFactory.getSessionFactory().openSession();
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
-        return session.createSelectionQuery("FROM User", User.class).list();
+            return session.createSelectionQuery("FROM User", User.class).list();
+        }
     }
 }

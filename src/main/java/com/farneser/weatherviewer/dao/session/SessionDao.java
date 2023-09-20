@@ -14,32 +14,34 @@ public class SessionDao extends EntityDao<Session, UUID> implements ISessionDao 
     }
 
     public List<Session> get() {
-        var session = HibernateFactory.getSessionFactory().openSession();
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
-        return session.createSelectionQuery("FROM Session", Session.class).list();
+            return session.createSelectionQuery("FROM Session", Session.class).list();
+        }
     }
 
     public void cleanUserSessions(int userId) {
-        var session = HibernateFactory.getSessionFactory().openSession();
+        try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
-        var transaction = session.beginTransaction();
+            var transaction = session.beginTransaction();
 
-        try {
-            var sessionsToDelete = session.createQuery("FROM Session s WHERE s.user.id = :userId", Session.class)
-                    .setParameter("userId", userId)
-                    .list();
+            try {
+                var sessionsToDelete = session.createQuery("FROM Session WHERE user.id = :userId", Session.class)
+                        .setParameter("userId", userId)
+                        .list();
 
-            for (var sessionToDelete : sessionsToDelete) {
-                session.remove(sessionToDelete);
+                for (var sessionToDelete : sessionsToDelete) {
+                    session.remove(sessionToDelete);
+                }
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+
+                System.out.println(Arrays.toString(e.getStackTrace()));
             }
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-
-            System.out.println(Arrays.toString(e.getStackTrace()));
         }
     }
 }

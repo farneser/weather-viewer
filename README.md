@@ -1,5 +1,7 @@
 # Пятое задание курса [java-backend-learning-course](https://zhukovsd.github.io/java-backend-learning-course/)
 
+[![Java CI with Maven](https://github.com/farneser/weather-viewer/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/weather-viewer/actions/workflows/maven.yml)
+
 ## [Задание](https://zhukovsd.github.io/java-backend-learning-course/Projects/WeatherViewer/)
 
 Веб-приложение для просмотра текущей погоды. Пользователь может зарегистрироваться и добавить в коллекцию один или

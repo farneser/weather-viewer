@@ -13,7 +13,7 @@ public abstract class ApiUriFactory {
     }
 
     public static URI buildDirect(String locationName) {
-        return URI.create(baseUrl + directApiPath + "?q=" + locationName + "&limit=10" + getApiKeyPath());
+        return URI.create(baseUrl + directApiPath + "?q=" + locationName.replace(" ", "+") + "&limit=10" + getApiKeyPath());
     }
 
     public static URI buildWeather(double latitude, double longitude) {

@@ -1,0 +1,86 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для компонента поиска */
+.search-component {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.search-input {
+    padding: 10px;
+    width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Стили для списка местоположений */
+.location-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.location-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.location-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Стили для информации о местоположении */
+.location-name,
+.location-country,
+.location-lat,
+.location-lon {
+    margin: 5px 0;
+}
+/* ... (остальные стили) */
+
+/* Стили для формы "Добавить локацию" */
+.location-card form {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.location-card form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.location-card form button:hover {
+    background-color: #45a049;
+}
+
+.location-card form input[type="hidden"] {
+    display: none; /* Скрыть скрытые поля */
+}

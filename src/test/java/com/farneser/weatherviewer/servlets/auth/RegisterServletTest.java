@@ -10,17 +10,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class RegisterServletTest {
 
+    private final IUserDao userDao = new UserDaoMock();
     @Mock
     private HttpServletRequest request;
-
     @Mock
     private HttpServletResponse response;
-
-    private final IUserDao userDao = new UserDaoMock();
     @InjectMocks
     private RegisterServlet servlet;
 

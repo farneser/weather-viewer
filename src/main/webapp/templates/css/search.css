@@ -1,11 +1,9 @@
-/* Общие стили */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Стили для компонента поиска */
 .search-component {
     text-align: center;
     margin-top: 20px;
@@ -29,7 +27,6 @@ body {
     cursor: pointer;
 }
 
-/* Стили для списка местоположений */
 .location-list {
     display: flex;
     flex-wrap: wrap;
@@ -52,16 +49,13 @@ body {
     align-items: center;
 }
 
-/* Стили для информации о местоположении */
 .location-name,
 .location-country,
 .location-lat,
 .location-lon {
     margin: 5px 0;
 }
-/* ... (остальные стили) */
 
-/* Стили для формы "Добавить локацию" */
 .location-card form {
     margin-top: 10px;
     text-align: center;
@@ -82,5 +76,5 @@ body {
 }
 
 .location-card form input[type="hidden"] {
-    display: none; /* Скрыть скрытые поля */
+    display: none;
 }

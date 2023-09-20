@@ -1,10 +1,10 @@
 <div th:fragment="search-component(search)">
-    <form th:action="search" method="get" class="search-component">
+    <form class="search-component" method="get" th:action="search">
         <label class="search-label">
-            <input type="text" name="location" placeholder="Search location" class="search-input" id="search-input"
-                   th:value="${search}">
+            <input class="search-input" id="search-input" name="location" placeholder="Search location" th:value="${search}"
+                   type="text">
         </label>
-        <button type="submit" class="search-button">Search</button>
+        <button class="search-button" type="submit">Search</button>
     </form>
 </div>
 

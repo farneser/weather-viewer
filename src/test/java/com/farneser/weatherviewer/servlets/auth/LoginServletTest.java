@@ -32,14 +32,13 @@ public class LoginServletTest {
 
     @Mock
     private ISessionDao sessionDao;
+    @Captor
+    private ArgumentCaptor<String> redirectUrlCaptor;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-
-    @Captor
-    private ArgumentCaptor<String> redirectUrlCaptor;
 
     @Test
     public void testDoPostWithValidCredentials() throws Exception {

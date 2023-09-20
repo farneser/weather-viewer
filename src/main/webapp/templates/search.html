@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather Viewer | Search</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/templates/components/search.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/templates/css/search.css}">
+    <link rel="stylesheet" th:href="@{/templates/components/search.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/templates/css/search.css}" type="text/css">
 </head>
 <body>
 
 <div th:replace="components/search-component.html(search)"></div>
 
 <div class="location-list">
-    <div th:each="location : ${locations}" class="location-card">
+    <div class="location-card" th:each="location : ${locations}">
         <div class="location-info">
             <div class="location-name" th:text="${location.getName()}"></div>
             <div class="location-country" th:text="${location.getCountry()}"></div>
@@ -19,9 +19,9 @@
             <div class="location-lon" th:text="${location.getLongitude()}"></div>
         </div>
 
-        <form th:action="@{search}" method="post">
-            <input type="hidden" name="lat" th:value="${location.getLatitude()}">
-            <input type="hidden" name="lon" th:value="${location.getLongitude()}">
+        <form method="post" th:action="@{search}">
+            <input name="lat" th:value="${location.getLatitude()}" type="hidden">
+            <input name="lon" th:value="${location.getLongitude()}" type="hidden">
             <button type="submit">Добавить</button>
         </form>
     </div>

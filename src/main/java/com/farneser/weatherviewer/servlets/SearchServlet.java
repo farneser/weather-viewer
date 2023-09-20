@@ -36,8 +36,6 @@ public class SearchServlet extends AuthServlet {
             });
         }
 
-
-        context.setVariable("search", search);
         context.setVariable("locations", locationsResponse);
         templateEngine.process("search", context, response.getWriter());
     }

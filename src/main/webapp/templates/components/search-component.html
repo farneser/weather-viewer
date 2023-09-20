@@ -1,7 +1,7 @@
-<div th:fragment="search-component(search)">
+<div>
     <form class="search-component" method="get" th:action="search">
         <label class="search-label">
-            <input class="search-input" id="search-input" name="location" placeholder="Search location" th:value="${search}"
+            <input class="search-input" id="search-input" name="location" placeholder="Search location"
                    type="text">
         </label>
         <button class="search-button" type="submit">Search</button>
@@ -9,14 +9,14 @@
 </div>
 
 
-<!--<script>-->
+<script>
 
-<!--    const urlParams = new URLSearchParams(window.location.search);-->
+    const urlParams = new URLSearchParams(window.location.search);
 
-<!--    const locationForm = urlParams.get('location')-->
+    const locationForm = urlParams.get('location')
 
-<!--    const input = document.getElementById("search-input")-->
+    const input = document.getElementById("search-input")
 
-<!--    input.value = locationForm-->
+    input.value = locationForm
 
-<!--</script>-->
+</script>

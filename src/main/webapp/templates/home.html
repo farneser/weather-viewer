@@ -6,9 +6,8 @@
     <link href="templates/components/search.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>root</h1>
-<div th:replace="components/search-component.html('')"></div>
 
+<div th:replace="components/search-component.html"></div>
 
 <ul>
     <li th:each="location : ${locations}">

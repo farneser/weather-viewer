@@ -5,7 +5,6 @@ import com.farneser.weatherviewer.helpers.factory.CoordinatesFactory;
 import com.farneser.weatherviewer.helpers.parser.ParameterParser;
 import com.farneser.weatherviewer.models.Location;
 import com.farneser.weatherviewer.servlets.auth.AuthServlet;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

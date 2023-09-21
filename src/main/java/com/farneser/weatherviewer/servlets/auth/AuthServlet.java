@@ -12,7 +12,7 @@ public abstract class AuthServlet extends BaseServlet {
     protected OpenWeatherApiService apiService = new OpenWeatherApiService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         try {
             var session = sessionDao.getById(getSessionId(req));

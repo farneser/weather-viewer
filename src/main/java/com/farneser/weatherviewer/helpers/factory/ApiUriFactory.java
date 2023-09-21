@@ -17,7 +17,7 @@ public abstract class ApiUriFactory {
     }
 
     public static URI buildWeather(double latitude, double longitude) {
-        return URI.create(baseUrl + weatherApiPath + "?lat=" + latitude + "&lon=" + longitude + getApiKeyPath());
+        return URI.create(baseUrl + weatherApiPath + "?lat=" + latitude + "&lon=" + longitude + "&units=metric" + getApiKeyPath());
     }
 
     private static String getApiKeyPath() {

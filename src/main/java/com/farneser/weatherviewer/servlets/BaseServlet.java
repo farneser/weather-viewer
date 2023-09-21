@@ -55,6 +55,12 @@ public abstract class BaseServlet extends HttpServlet {
         super.service(req, resp);
     }
 
+    protected void service(HttpServletRequest req, HttpServletResponse resp, WebContext context) throws ServletException, IOException {
+        this.context = context;
+
+        super.service(req, resp);
+    }
+
     protected UUID getSessionId(HttpServletRequest request) {
         var cookies = request.getCookies();
 

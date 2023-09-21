@@ -13,13 +13,9 @@ import java.util.ArrayList;
 public class HomeServlet extends AuthServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        var session = sessionDao.getById(getSessionId(request));
-
-        var user = session.getUser();
-
         var cities = new ArrayList<WeatherResponse>();
 
-        var locations = locationDao.getByUserId(user.getId());
+        var locations = locationDao.getByUserId(session.getUser().getId());
 
         locations.forEach(location -> cities.add(apiService.getWeatherByLocation(location.getLatitude(), location.getLongitude())));
 
@@ -27,6 +23,5 @@ public class HomeServlet extends AuthServlet {
 
         templateEngine.process("home", context, response.getWriter());
     }
-
 
 }

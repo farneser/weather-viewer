@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather viewer | Home</title>
-    <link rel="stylesheet" th:href="@{/templates/components/search-component.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/templates/components/weather-component.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/templates/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/templates/components/header-component/header-component.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/templates/components/search-component/search-component.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/templates/components/weather-component/weather-component.css}" type="text/css">
 </head>
 <body>
 
-<div th:replace="components/search-component.html"></div>
+<div th:replace="components/header-component/header-component.html"></div>
 
+<div th:replace="components/search-component/search-component.html"></div>
 
-<div th:replace="components/weather-component.html"></div>
+<div th:replace="components/weather-component/weather-component.html"></div>
 
 
 

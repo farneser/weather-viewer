@@ -1,5 +1,7 @@
 package com.farneser.weatherviewer.servlets.auth;
 
+import com.farneser.weatherviewer.exceptions.ParamNotExistsException;
+import com.farneser.weatherviewer.exceptions.PasswordsNotTheSameException;
 import com.farneser.weatherviewer.helpers.factory.UserDtoFactory;
 import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
 import com.farneser.weatherviewer.models.User;
@@ -22,31 +24,29 @@ public class RegisterServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        var registerDto = UserDtoFactory.getRegister(request);
         try {
+            var registerDto = UserDtoFactory.getRegister(request);
+
             if (registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
+                var user = new User();
 
-                try {
-                    var user = new User();
+                user.setUsername(registerDto.getUsername());
+                user.setPassword(PasswordUtil.hashPassword(registerDto.getPassword()));
 
-                    user.setUsername(registerDto.getUsername());
-                    user.setPassword(PasswordUtil.hashPassword(registerDto.getPassword()));
-
-                    userDao.create(user);
-                    response.sendRedirect("login");
-
-                } catch (ConstraintViolationException e) {
-                    context.setVariable("errorMessage", "There is already a user with this name");
-                    templateEngine.process("register", context, response.getWriter());
-                }
-
+                userDao.create(user);
+                response.sendRedirect("login");
             } else {
                 context.setVariable("errorMessage", "There is already a user with this name");
-                templateEngine.process("register", context, response.getWriter());
             }
-
         } catch (NullPointerException e) {
             response.sendRedirect("register");
+            return;
+        } catch (ParamNotExistsException | PasswordsNotTheSameException e) {
+            context.setVariable("errorMessage", e.getMessage());
+        } catch (ConstraintViolationException e) {
+            context.setVariable("errorMessage", "There is already a user with this name");
         }
+
+        templateEngine.process("register", context, response.getWriter());
     }
 }

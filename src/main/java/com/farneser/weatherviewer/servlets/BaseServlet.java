@@ -52,7 +52,7 @@ public abstract class BaseServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         context = ThymeleafFactory.buildWebContext(req, resp, getServletContext());
 
-        super.service(req, resp);
+        this.service(req, resp, context);
     }
 
     protected void service(HttpServletRequest req, HttpServletResponse resp, WebContext context) throws ServletException, IOException {

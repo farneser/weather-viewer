@@ -8,10 +8,6 @@ public class ParameterParser {
         return request.getParameter(paramName);
     }
 
-    public static int getInt(HttpServletRequest request, String paramName) {
-        return getDouble(request, paramName).intValue();
-    }
-
     public static Double getDouble(HttpServletRequest request, String paramName) {
         var paramValue = request.getParameter(paramName);
 

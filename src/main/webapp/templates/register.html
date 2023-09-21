@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>Weather viewer | Register</title>
     <link rel="stylesheet" th:href="@{/templates/css/register.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/templates/css/styles.css}" type="text/css">
 </head>
@@ -12,19 +12,19 @@
     <p th:text="${errorMessage}"></p>
 </div>
 <form method="post" th:action="@{/register}" class="registration-form">
-    <label for="username" class="registration-form__label">Имя пользователя:</label>
+    <label for="username" class="registration-form__label">Username:</label>
     <input id="username" name="username" required type="text" class="registration-form__input"><br><br>
 
-    <label for="password" class="registration-form__label">Пароль:</label>
+    <label for="password" class="registration-form__label">Password:</label>
     <input id="password" name="password" required type="password" class="registration-form__input"><br><br>
 
-    <label for="confirmPassword" class="registration-form__label">Повторите пароль:</label>
+    <label for="confirmPassword" class="registration-form__label">Confirm password:</label>
     <input id="confirmPassword" name="confirmPassword" required type="password"
            class="registration-form__input"><br><br>
 
     <input type="submit" value="Зарегистрироваться" class="registration-form__submit-button">
 </form>
 
-<a href="login" class="login-link">Логин</a>
+<a href="login" class="login-link">Login</a>
 </body>
 </html>

@@ -21,6 +21,17 @@ PASSWORD_ENV_VARIABLE=postgres
 WEATHER_DB_NAME_ENV_VARIABLE=your_api_key
 ```
 
+### Запуск через jetty
+
+```bash
+git clone https://github.com/farneser/weather-viewer
+cd weather-viewer
+./mvnw install
+./mnvw jetty:run
+```
+
+Приложение будет доступно по пути https://localhost:8080/weather-viewer/home
+
 ### Запуск через Intellij Idea
 
 1. Открытие панели конфигураций

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Вход</title>
+    <title>Weather viewer | Login</title>
     <link rel="stylesheet" th:href="@{/templates/css/styles.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/templates/css/login.css}" type="text/css">
 </head>
@@ -14,15 +14,15 @@
 
 <form method="post" th:action="@{/login}" class="login-form">
 
-    <label for="username" class="login-form__label">Имя пользователя:</label>
+    <label for="username" class="login-form__label">Username:</label>
     <input id="username" name="username" required type="text" class="login-form__input"><br><br>
 
-    <label for="password" class="login-form__label">Пароль:</label>
+    <label for="password" class="login-form__label">Password:</label>
     <input id="password" name="password" required type="password" class="login-form__input"><br><br>
 
     <input type="submit" value="Войти" class="login-form__submit-button">
 </form>
 
-<a href="register" class="register-link">Регистрация</a>
+<a href="register" class="register-link">Register</a>
 </body>
 </html>

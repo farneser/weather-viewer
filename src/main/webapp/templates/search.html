@@ -33,10 +33,10 @@
     </div>
 </div>
 
-<div th:unless="${locations != null && locations.size() != 0}" class="no-cities-container">
+<div class="no-cities-container" th:unless="${locations != null && locations.size() != 0}">
     <p class="no-cities-message">
         Cities not found. You can find your city with
-        <a href="search" class="no-cities-link">
+        <a class="no-cities-link" href="search">
             <strong>search</strong>
         </a>
     </p>

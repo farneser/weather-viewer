@@ -8,21 +8,21 @@
 </head>
 <body>
 <h1 class="login-form__title">Вход</h1>
-<div th:if="${errorMessage != null}" class="error-container">
+<div class="error-container" th:if="${errorMessage != null}">
     <p th:text="${errorMessage}"></p>
 </div>
 
-<form method="post" th:action="@{/login}" class="login-form">
+<form class="login-form" method="post" th:action="@{/login}">
 
-    <label for="username" class="login-form__label">Username:</label>
-    <input id="username" name="username" required type="text" class="login-form__input"><br><br>
+    <label class="login-form__label" for="username">Username:</label>
+    <input class="login-form__input" id="username" name="username" required type="text"><br><br>
 
-    <label for="password" class="login-form__label">Password:</label>
-    <input id="password" name="password" required type="password" class="login-form__input"><br><br>
+    <label class="login-form__label" for="password">Password:</label>
+    <input class="login-form__input" id="password" name="password" required type="password"><br><br>
 
-    <input type="submit" value="Войти" class="login-form__submit-button">
+    <input class="login-form__submit-button" type="submit" value="Войти">
 </form>
 
-<a href="register" class="register-link">Register</a>
+<a class="register-link" href="register">Register</a>
 </body>
 </html>

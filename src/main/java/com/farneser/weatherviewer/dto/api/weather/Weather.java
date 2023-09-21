@@ -11,6 +11,10 @@ public class Weather {
     private int id;
     @JsonProperty("main")
     private String main;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("icon")
+    private String icon;
 
     public String getDescription() {
         if (description == null || description.isEmpty()) {
@@ -19,11 +23,6 @@ public class Weather {
 
         return description.substring(0, 1).toUpperCase() + description.substring(1);
     }
-
-    @JsonProperty("description")
-    private String description;
-    @JsonProperty("icon")
-    private String icon;
 
     public String getIconUrl() {
         return "https://openweathermap.org/img/wn/" + icon + "@4x.png";

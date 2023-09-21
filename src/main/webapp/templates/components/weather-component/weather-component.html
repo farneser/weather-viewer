@@ -1,11 +1,12 @@
 <div class="weather-container">
     <div class="weather-card weather-card--city" th:each="forecast, iterStat : ${cities}">
-        <div class="weather-card__location" th:text="${forecast.getName() + (forecast.getSys().getCountry() != null ? ', ' + forecast.getSys().getCountry() : '')}"></div>
+        <div class="weather-card__location"
+             th:text="${forecast.getName() + (forecast.getSys().getCountry() != null ? ', ' + forecast.getSys().getCountry() : '')}"></div>
         <div class="weather-card__weather-details">
             <ul class="weather-card__weather-list">
-                <li th:each="weather : ${forecast.getWeather()}" class="weather-card__weather-item">
+                <li class="weather-card__weather-item" th:each="weather : ${forecast.getWeather()}">
                     <div class="weather-card__icon">
-                        <img th:src="${weather.getIconUrl()}" th:alt="${weather.getDescription()}">
+                        <img th:alt="${weather.getDescription()}" th:src="${weather.getIconUrl()}">
                     </div>
                     <div class="weather-card__description" th:text="${weather.getDescription()}"></div>
                 </li>
@@ -24,9 +25,9 @@
             <div class="weather-card__wind">Wind speed: <span th:text="${forecast.getWind().getSpeed()}"></span>m/s
             </div>
 
-            <form class="weather-card__delete" action="home" method="post">
-                <input type="hidden" name="lat" th:value="${forecast.getCoordinates().getLat()}">
-                <input type="hidden" name="lon" th:value="${forecast.getCoordinates().getLon()}">
+            <form action="home" class="weather-card__delete" method="post">
+                <input name="lat" th:value="${forecast.getCoordinates().getLat()}" type="hidden">
+                <input name="lon" th:value="${forecast.getCoordinates().getLon()}" type="hidden">
                 <button class="delete-button" onclick="">Удалить</button>
             </form>
         </div>

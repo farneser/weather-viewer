@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <title>Вход</title>
     <link rel="stylesheet" th:href="@{/templates/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/templates/css/login.css}" type="text/css">
 </head>
 <body>
-<h1>Вход</h1>
-<div th:if="${errorMessage != null}">
+<h1 class="login-form__title">Вход</h1>
+<div th:if="${errorMessage != null}" class="error-container">
     <p th:text="${errorMessage}"></p>
 </div>
 
-<form method="post" th:action="@{/login}">
+<form method="post" th:action="@{/login}" class="login-form">
 
-    <label for="username">Имя пользователя:</label>
-    <input id="username" name="username" required type="text"><br><br>
+    <label for="username" class="login-form__label">Имя пользователя:</label>
+    <input id="username" name="username" required type="text" class="login-form__input"><br><br>
 
-    <label for="password">Пароль:</label>
-    <input id="password" name="password" required type="password"><br><br>
+    <label for="password" class="login-form__label">Пароль:</label>
+    <input id="password" name="password" required type="password" class="login-form__input"><br><br>
 
-    <input type="submit" value="Войти">
+    <input type="submit" value="Войти" class="login-form__submit-button">
 </form>
+
+<a href="register" class="register-link">Регистрация</a>
 </body>
 </html>

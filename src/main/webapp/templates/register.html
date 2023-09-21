@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
+    <link rel="stylesheet" th:href="@{/templates/css/register.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/templates/css/styles.css}" type="text/css">
 </head>
 <body>
-<h1>Регистрация</h1>
-<div th:if="${errorMessage != null}">
+<h1 class="registration-form__title">Регистрация</h1>
+<div th:if="${errorMessage != null}" class="error-container">
     <p th:text="${errorMessage}"></p>
 </div>
-<form method="post" th:action="@{/register}">
-    <label for="username">Имя пользователя:</label>
-    <input id="username" name="username" required type="text"><br><br>
+<form method="post" th:action="@{/register}" class="registration-form">
+    <label for="username" class="registration-form__label">Имя пользователя:</label>
+    <input id="username" name="username" required type="text" class="registration-form__input"><br><br>
 
-    <label for="password">Пароль:</label>
-    <input id="password" name="password" required type="password"><br><br>
+    <label for="password" class="registration-form__label">Пароль:</label>
+    <input id="password" name="password" required type="password" class="registration-form__input"><br><br>
 
-    <label for="confirmPassword">Повторите пароль:</label>
-    <input id="confirmPassword" name="confirmPassword" required type="password"><br><br>
+    <label for="confirmPassword" class="registration-form__label">Повторите пароль:</label>
+    <input id="confirmPassword" name="confirmPassword" required type="password"
+           class="registration-form__input"><br><br>
 
-    <input type="submit" value="Зарегистрироваться">
+    <input type="submit" value="Зарегистрироваться" class="registration-form__submit-button">
 </form>
+
+<a href="login" class="login-link">Логин</a>
 </body>
 </html>

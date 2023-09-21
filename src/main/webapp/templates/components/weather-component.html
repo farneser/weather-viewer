@@ -1,0 +1,28 @@
+<div class="weather-container">
+    <div class="weather-card weather-card--city" th:each="forecast : ${cities}">
+        <div class="weather-card__location" th:text="${forecast.getName()}"></div>
+        <div class="weather-card__weather-details">
+            <ul class="weather-card__weather-list">
+                <li th:each="weather : ${forecast.getWeather()}" class="weather-card__weather-item">
+                    <div class="weather-card__icon">
+                        <img th:src="${weather.getIconUrl()}" th:alt="${weather.getDescription()}">
+                    </div>
+                    <div class="weather-card__description" th:text="${weather.getDescription()}"></div>
+                </li>
+            </ul>
+            <div class="weather-card__temperature"></div>
+            <div class="weather-card__feels-like">Feels like: <span
+                    th:text="${forecast.getMain().getFeelsLike()}"></span></div>
+            <div class="weather-card__temp-range">Min/Max temperature:
+                <span th:text="${forecast.getMain().getTempMin()}"></span>
+                <span>/</span>
+                <span th:text="${forecast.getMain().getTempMax()}"></span>
+            </div>
+            <div class="weather-card__humidity">Humidity: <span th:text="${forecast.getMain().getHumidity()}"></span>
+            </div>
+            <div class="weather-card__visibility">Visibility: <span th:text="${forecast.getVisibility()}"></span></div>
+            <div class="weather-card__wind">Wind speed: <span th:text="${forecast.getWind().getSpeed()}"></span>m/s
+            </div>
+        </div>
+    </div>
+</div>

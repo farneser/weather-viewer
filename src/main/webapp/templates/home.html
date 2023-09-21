@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather viewer | Home</title>
-    <link href="templates/components/search.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{/templates/components/search-component.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/templates/components/weather-component.css}" type="text/css">
 </head>
 <body>
 
 <div th:replace="components/search-component.html"></div>
 
-<ul>
-    <li th:each="location : ${locations}">
-        <span th:text="${location}"></span>
-    </li>
-</ul>
+
+<div th:replace="components/weather-component.html"></div>
+
+
 
 </body>
 </html>

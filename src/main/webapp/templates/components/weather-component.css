@@ -1,0 +1,79 @@
+/* Styles for the weather container */
+.weather-container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Styles for the weather card block */
+.weather-card {
+    width: 300px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the location element inside the weather card block */
+.weather-card__location {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Styles for the weather details block inside the weather card block */
+.weather-card__weather-details {
+    font-size: 16px;
+}
+
+/* Styles for the weather list inside the weather details block */
+.weather-card__weather-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Styles for each weather item in the weather list */
+.weather-card__weather-item {
+    /*display: flex;*/
+    align-items: center;
+    margin: 5px 0;
+}
+
+/* Styles for the weather icon in each weather item */
+.weather-card__icon img {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Styles for the temperature block inside the weather card block */
+.weather-card__temperature {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Styles for the "Feels like" element inside the weather card block */
+.weather-card__feels-like {
+    font-size: 16px;
+}
+
+/* Styles for the temperature range element inside the weather card block */
+.weather-card__temp-range {
+    font-size: 16px;
+}
+
+/* Styles for the humidity element inside the weather card block */
+.weather-card__humidity {
+    font-size: 16px;
+}
+
+/* Styles for the visibility element inside the weather card block */
+.weather-card__visibility {
+    font-size: 16px;
+}
+
+/* Styles for the wind element inside the weather card block */
+.weather-card__wind {
+    font-size: 16px;
+}

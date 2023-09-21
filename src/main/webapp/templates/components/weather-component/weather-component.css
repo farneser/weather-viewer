@@ -1,79 +1,75 @@
-/* Styles for the weather container */
 .weather-container {
-    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-/* Styles for the weather card block */
 .weather-card {
-    width: 300px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     padding: 20px;
     margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px);
+    box-sizing: border-box;
 }
 
-/* Styles for the location element inside the weather card block */
 .weather-card__location {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
-/* Styles for the weather details block inside the weather card block */
-.weather-card__weather-details {
-    font-size: 16px;
-}
-
-/* Styles for the weather list inside the weather details block */
 .weather-card__weather-list {
     list-style: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-/* Styles for each weather item in the weather list */
 .weather-card__weather-item {
-    /*display: flex;*/
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
     align-items: center;
-    margin: 5px 0;
 }
 
-/* Styles for the weather icon in each weather item */
 .weather-card__icon img {
-    width: 100%;
-    max-width: 300px;
+    width: 64px;
+    height: 64px;
+    margin-right: 5px;
 }
 
-/* Styles for the temperature block inside the weather card block */
-.weather-card__temperature {
-    font-size: 20px;
-    font-weight: bold;
+.weather-card__description {
+    font-size: 14px;
 }
 
-/* Styles for the "Feels like" element inside the weather card block */
-.weather-card__feels-like {
-    font-size: 16px;
-}
-
-/* Styles for the temperature range element inside the weather card block */
-.weather-card__temp-range {
-    font-size: 16px;
-}
-
-/* Styles for the humidity element inside the weather card block */
-.weather-card__humidity {
-    font-size: 16px;
-}
-
-/* Styles for the visibility element inside the weather card block */
-.weather-card__visibility {
-    font-size: 16px;
-}
-
-/* Styles for the wind element inside the weather card block */
+.weather-card__temperature,
+.weather-card__feels-like,
+.weather-card__temp-range,
+.weather-card__humidity,
+.weather-card__visibility,
 .weather-card__wind {
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.weather-card__delete {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.delete-button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
 }

@@ -1,5 +1,5 @@
 <div class="weather-container">
-    <div class="weather-card weather-card--city" th:each="forecast : ${cities}">
+    <div class="weather-card weather-card--city" th:each="forecast, iterStat : ${cities}">
         <div class="weather-card__location" th:text="${forecast.getName()}"></div>
         <div class="weather-card__weather-details">
             <ul class="weather-card__weather-list">
@@ -23,6 +23,12 @@
             <div class="weather-card__visibility">Visibility: <span th:text="${forecast.getVisibility()}"></span></div>
             <div class="weather-card__wind">Wind speed: <span th:text="${forecast.getWind().getSpeed()}"></span>m/s
             </div>
+
+            <form class="weather-card__delete" action="home" method="post">
+                <input type="hidden" name="lat" th:value="${forecast.getCoordinates().getLat()}">
+                <input type="hidden" name="lon" th:value="${forecast.getCoordinates().getLon()}">
+                <button class="delete-button" onclick="">Удалить</button>
+            </form>
         </div>
     </div>
 </div>

@@ -45,8 +45,8 @@ public abstract class EntityDao<T, K> {
     }
 
     public void delete(K id) {
-        Transaction transaction;
         try (var session = HibernateFactory.getSessionFactory().openSession()) {
+            Transaction transaction;
 
             transaction = session.beginTransaction();
             var entity = getById(id);
@@ -54,8 +54,8 @@ public abstract class EntityDao<T, K> {
             if (entity != null) {
                 session.remove(entity);
             }
-        }
 
-        transaction.commit();
+            transaction.commit();
+        }
     }
 }

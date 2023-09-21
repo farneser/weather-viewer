@@ -6,8 +6,10 @@ import com.farneser.weatherviewer.services.OpenWeatherApiService;
 import com.farneser.weatherviewer.servlets.BaseServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.ws.rs.NotFoundException;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 
 public abstract class AuthServlet extends BaseServlet {
@@ -29,8 +31,14 @@ public abstract class AuthServlet extends BaseServlet {
                 this.session = session;
 
                 super.service(req, resp, context);
+                return;
             }
-        } catch (Exception d) {
+
+            throw new NotFoundException();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace()));
+
             resp.sendRedirect("login");
         }
 

@@ -19,13 +19,14 @@ public class LocationDao extends EntityDao<Location, Integer> implements ILocati
     }
 
     @Override
-    public Location getByCoordinates(double lat, double lon) {
+    public Location getByCoordinates(double lat, double lon, int userId) {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
             return session
-                    .createSelectionQuery("FROM Location WHERE latitude = :lat AND longitude = :lon", Location.class)
+                    .createSelectionQuery("FROM Location WHERE latitude = :lat AND longitude = :lon AND user.id = :userId", Location.class)
                     .setParameter("lat", lat)
                     .setParameter("lon", lon)
+                    .setParameter("userId", userId)
                     .uniqueResult();
         }
     }

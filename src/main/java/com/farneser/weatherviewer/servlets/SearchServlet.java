@@ -29,7 +29,8 @@ public class SearchServlet extends AuthServlet {
                 var locationByCoordinates = locationDao
                         .getByCoordinates(
                                 locationResponse.getLatitude(),
-                                locationResponse.getLongitude());
+                                locationResponse.getLongitude(),
+                                session.getUser().getId());
                 if (locationByCoordinates == null) {
                     locationsResponse.add(locationResponse);
                 }
@@ -44,7 +45,7 @@ public class SearchServlet extends AuthServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         var coordinates = CoordinatesFactory.getCoordinates(req);
 
-        var location = locationDao.getByCoordinates(coordinates.getLat(), coordinates.getLon());
+        var location = locationDao.getByCoordinates(coordinates.getLat(), coordinates.getLon(), session.getUser().getId());
 
         if (location == null) {
 

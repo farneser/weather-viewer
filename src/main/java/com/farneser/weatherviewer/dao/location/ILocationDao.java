@@ -6,7 +6,7 @@ import com.farneser.weatherviewer.models.Location;
 import java.util.List;
 
 public interface ILocationDao extends IEntityDao<Location, Integer> {
-    Location getByCoordinates(double lat, double lon);
+    Location getByCoordinates(double lat, double lon, int userId);
 
     List<Location> getByUserId(int userId);
 }

@@ -17,10 +17,10 @@ public class LocationDaoMock extends EntityDaoMock<Location, Integer> implements
     }
 
     @Override
-    public Location getByCoordinates(double lat, double lon) {
+    public Location getByCoordinates(double lat, double lon, int userId) {
 
         for (var location : get()) {
-            if (location.getLatitude() == lat && location.getLongitude() == lon) {
+            if (location.getLatitude() == lat && location.getLongitude() == lon && location.getUser().getId() == userId) {
                 return location;
             }
         }

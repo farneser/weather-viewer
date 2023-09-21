@@ -1,6 +1,6 @@
 <div class="weather-container">
     <div class="weather-card weather-card--city" th:each="forecast, iterStat : ${cities}">
-        <div class="weather-card__location" th:text="${forecast.getName()}"></div>
+        <div class="weather-card__location" th:text="${forecast.getName() + (forecast.getSys().getCountry() != null ? ', ' + forecast.getSys().getCountry() : '')}"></div>
         <div class="weather-card__weather-details">
             <ul class="weather-card__weather-list">
                 <li th:each="weather : ${forecast.getWeather()}" class="weather-card__weather-item">

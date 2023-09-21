@@ -14,7 +14,18 @@
 
 <div th:replace="components/search-component/search-component.html"></div>
 
-<div th:replace="components/weather-component/weather-component.html"></div>
+<div th:if="${cities != null && cities.size() != 0}">
+    <div th:replace="components/weather-component/weather-component.html"></div>
+</div>
+
+<div th:unless="${cities != null && cities.size() != 0}" class="no-cities-container">
+    <p class="no-cities-message">
+        Cities not found. You can find your city with
+        <a href="search" class="no-cities-link">
+            <strong>search</strong>
+        </a>
+    </p>
+</div>
 
 </body>
 </html>

@@ -9,3 +9,27 @@
     margin-top: 20px;
     color: red;
 }
+
+/* Стили для контейнера с сообщением об отсутствии городов */
+.no-cities-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Стили для текста сообщения */
+.no-cities-message {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Стили для ссылки на поиск */
+.no-cities-link {
+    font-weight: bold;
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.no-cities-link:hover {
+    color: #0056b3;
+}

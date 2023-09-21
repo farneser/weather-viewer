@@ -14,22 +14,34 @@
 
 <div th:replace="components/search-component/search-component.html"></div>
 
-<div class="location-list">
-    <div class="location-card" th:each="location : ${locations}">
-        <div class="location-info">
-            <div class="location-name" th:text="${location.getName()}"></div>
-            <div class="location-country" th:text="${location.getCountry()}"></div>
-            <div class="location-lat" th:text="${location.getLatitude()}"></div>
-            <div class="location-lon" th:text="${location.getLongitude()}"></div>
-        </div>
+<div th:if="${locations != null && locations.size() != 0}">
+    <div class="location-list">
+        <div class="location-card" th:each="location : ${locations}">
+            <div class="location-info">
+                <div class="location-name" th:text="${location.getName()}"></div>
+                <div class="location-country" th:text="${location.getCountry()}"></div>
+                <div class="location-lat" th:text="${location.getLatitude()}"></div>
+                <div class="location-lon" th:text="${location.getLongitude()}"></div>
+            </div>
 
-        <form method="post" th:action="@{search}">
-            <input name="lat" th:value="${location.getLatitude()}" type="hidden">
-            <input name="lon" th:value="${location.getLongitude()}" type="hidden">
-            <button type="submit">Добавить</button>
-        </form>
+            <form method="post" th:action="@{search}">
+                <input name="lat" th:value="${location.getLatitude()}" type="hidden">
+                <input name="lon" th:value="${location.getLongitude()}" type="hidden">
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
     </div>
 </div>
+
+<div th:unless="${locations != null && locations.size() != 0}" class="no-cities-container">
+    <p class="no-cities-message">
+        Cities not found. You can find your city with
+        <a href="search" class="no-cities-link">
+            <strong>search</strong>
+        </a>
+    </p>
+</div>
+
 
 </body>
 </html>

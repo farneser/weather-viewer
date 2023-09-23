@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "Home page", urlPatterns = "/home")
+@WebServlet(name = "Home page", urlPatterns = "")
 public class HomeServlet extends AuthServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -50,6 +50,6 @@ public class HomeServlet extends AuthServlet {
             locationDao.delete(location.getId());
         }
 
-        resp.sendRedirect("home");
+        resp.sendRedirect("");
     }
 }

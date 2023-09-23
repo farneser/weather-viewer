@@ -56,7 +56,7 @@ public class LoginServlet extends BaseServlet {
 
             response.addCookie(cookie);
 
-            response.sendRedirect("home");
+            response.sendRedirect("");
         } catch (ParamNotExistsException e) {
             context.setVariable("errorMessage", e.getMessage());
             templateEngine.process("login", context, response.getWriter());

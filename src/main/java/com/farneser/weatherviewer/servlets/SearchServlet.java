@@ -60,7 +60,7 @@ public class SearchServlet extends AuthServlet {
 
             locationDao.create(location);
 
-            resp.sendRedirect("home");
+            resp.sendRedirect("");
             return;
         }
 

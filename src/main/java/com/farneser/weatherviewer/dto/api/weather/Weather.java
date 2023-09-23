@@ -21,7 +21,7 @@ public class Weather {
             return description;
         }
 
-        return description.substring(0, 1).toUpperCase() + description.substring(1);
+        return description.substring(0, 1).toUpperCase() + description.substring(1).toLowerCase();
     }
 
     public String getIconUrl() {

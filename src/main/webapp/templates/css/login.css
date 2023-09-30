@@ -20,7 +20,7 @@ h1 {
 }
 
 .login-form__input {
-    width: 100%;
+    width: 380px;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;

@@ -5,6 +5,7 @@ import com.farneser.weatherviewer.dto.api.WeatherResponse;
 import com.farneser.weatherviewer.helpers.factory.ApiUriFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.net.URI;
@@ -15,9 +16,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Getter
 public class OpenWeatherApiService {
-    private final HttpClient client = HttpClient.newHttpClient();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private HttpClient client = HttpClient.newHttpClient();
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    public OpenWeatherApiService() {
+    }
+
+    public OpenWeatherApiService(HttpClient httpClient, ObjectMapper objectMapper) {
+        client = httpClient;
+        this.objectMapper = objectMapper;
+    }
 
     private HttpRequest buildRequest(URI uri) {
         return HttpRequest.newBuilder(uri)
@@ -26,36 +36,36 @@ public class OpenWeatherApiService {
     }
 
     public List<LocationResponse> getLocationsByName(String locationName) {
-
         try {
             var request = buildRequest(ApiUriFactory.buildDirect(locationName));
 
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            return objectMapper.readValue(response.body(), new TypeReference<>() {
-            });
-
+            if (response.statusCode() == 200) {
+                return objectMapper.readValue(response.body(), new TypeReference<>() {
+                });
+            } else {
+                return new ArrayList<>();
+            }
         } catch (IOException | InterruptedException e) {
-            System.out.println(e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
-
             return new ArrayList<>();
         }
     }
 
-
     public WeatherResponse getWeatherByLocation(double lat, double lon) {
         try {
-
             var request = buildRequest(ApiUriFactory.buildWeather(lat, lon));
 
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            return objectMapper.readValue(response.body(), WeatherResponse.class);
+            if (response.statusCode() == 200) {
+                return objectMapper.readValue(response.body(), WeatherResponse.class);
+            } else {
+                return null;
+            }
         } catch (IOException | InterruptedException e) {
-            System.out.println(e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
-
             return null;
         }
     }

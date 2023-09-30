@@ -2,21 +2,8 @@
     <form class="search-component" method="get" th:action="search">
         <label class="search-label">
             <input class="search-input" id="search-input" name="location" placeholder="Search location"
-                   type="text">
+                   type="text" th:value="${search_field}">
         </label>
         <button class="search-button" type="submit">Search</button>
     </form>
 </div>
-
-
-<script>
-
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const locationForm = urlParams.get('location')
-
-    const input = document.getElementById("search-input")
-
-    input.value = locationForm
-
-</script>

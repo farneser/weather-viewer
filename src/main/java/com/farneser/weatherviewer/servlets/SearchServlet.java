@@ -37,6 +37,7 @@ public class SearchServlet extends AuthServlet {
             });
         }
 
+        context.setVariable("search_field", search);
         context.setVariable("locations", locationsResponse);
         templateEngine.process("search", context, response.getWriter());
     }
@@ -44,6 +45,8 @@ public class SearchServlet extends AuthServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         var coordinates = CoordinatesFactory.getCoordinates(req);
+
+        var search = ParameterParser.getString(req, "search_field");
 
         var location = locationDao.getByCoordinates(coordinates.getLat(), coordinates.getLon(), session.getUser().getId());
 
@@ -60,7 +63,7 @@ public class SearchServlet extends AuthServlet {
 
             locationDao.create(location);
 
-            resp.sendRedirect("");
+            resp.sendRedirect("?location=" + search);
             return;
         }
 

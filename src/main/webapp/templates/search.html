@@ -25,6 +25,7 @@
             </div>
 
             <form method="post" th:action="@{search}">
+                <input name="search_field" th:value="${search_field}" type="hidden">
                 <input name="lat" th:value="${location.getLatitude()}" type="hidden">
                 <input name="lon" th:value="${location.getLongitude()}" type="hidden">
                 <button type="submit">Добавить</button>

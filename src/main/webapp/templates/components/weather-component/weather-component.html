@@ -25,10 +25,10 @@
             <div class="weather-card__wind">Wind speed: <span th:text="${forecast.getWind().getSpeed()}"></span>m/s
             </div>
 
-            <form action="" class="weather-card__delete" method="post">
+            <form action="dashboard" class="weather-card__delete" method="post">
                 <input name="lat" th:value="${forecast.getCoordinates().getLat()}" type="hidden">
                 <input name="lon" th:value="${forecast.getCoordinates().getLon()}" type="hidden">
-                <button class="delete-button" onclick="">Удалить</button>
+                <button class="delete-button">Удалить</button>
             </form>
         </div>
     </div>

@@ -25,7 +25,7 @@ public class LoginServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         try {
-            var loginDto = UserDtoFactory.getLogin(request);
+                var loginDto = UserDtoFactory.getLogin(request);
 
             User user = null;
 
@@ -56,7 +56,7 @@ public class LoginServlet extends BaseServlet {
 
             response.addCookie(cookie);
 
-            response.sendRedirect("");
+            response.sendRedirect("dashboard");
         } catch (ParamNotExistsException e) {
             context.setVariable("errorMessage", e.getMessage());
             templateEngine.process("login", context, response.getWriter());

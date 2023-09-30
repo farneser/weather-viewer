@@ -23,11 +23,11 @@ public abstract class UserDtoFactory {
             throw new ParamNotExistsException("confirmPassword");
         }
 
+        registerDto.setConfirmPassword(confirmPassword);
+
         if (!registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
             throw new PasswordsNotTheSameException();
         }
-
-        registerDto.setConfirmPassword(confirmPassword);
 
         return registerDto;
     }

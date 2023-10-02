@@ -1,7 +1,7 @@
 package com.farneser.weatherviewer.dao.user;
 
 import com.farneser.weatherviewer.dao.EntityDao;
-import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
+import com.farneser.weatherviewer.factory.HibernateFactory;
 import com.farneser.weatherviewer.models.User;
 
 import java.util.List;

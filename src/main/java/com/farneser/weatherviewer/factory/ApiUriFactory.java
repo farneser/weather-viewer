@@ -1,4 +1,4 @@
-package com.farneser.weatherviewer.helpers.factory;
+package com.farneser.weatherviewer.factory;
 
 import java.net.URI;
 
@@ -12,11 +12,11 @@ public abstract class ApiUriFactory {
         ApiUriFactory.apiKey = apiKey;
     }
 
-    public static URI buildDirect(String locationName) {
+    public static URI buildDirectUri(String locationName) {
         return URI.create(baseUrl + directApiPath + "?q=" + locationName.replace(" ", "+") + "&limit=10" + getApiKeyPath());
     }
 
-    public static URI buildWeather(double latitude, double longitude) {
+    public static URI buildWeatherUri(double latitude, double longitude) {
         return URI.create(baseUrl + weatherApiPath + "?lat=" + latitude + "&lon=" + longitude + "&units=metric" + getApiKeyPath());
     }
 

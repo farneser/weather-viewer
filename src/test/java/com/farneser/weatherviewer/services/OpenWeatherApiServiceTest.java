@@ -3,7 +3,7 @@ package com.farneser.weatherviewer.services;
 import com.farneser.weatherviewer.dto.api.LocationResponse;
 import com.farneser.weatherviewer.dto.api.WeatherResponse;
 import com.farneser.weatherviewer.dto.api.weather.*;
-import com.farneser.weatherviewer.helpers.factory.ApiUriFactory;
+import com.farneser.weatherviewer.factory.ApiUriFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,6 +1,6 @@
 package com.farneser.weatherviewer.models;
 
-import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
+import com.farneser.weatherviewer.utils.PasswordUtil;
 
 import java.util.ArrayList;
 import java.util.List;

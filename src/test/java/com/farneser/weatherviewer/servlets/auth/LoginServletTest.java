@@ -2,7 +2,7 @@ package com.farneser.weatherviewer.servlets.auth;
 
 import com.farneser.weatherviewer.dao.session.ISessionDao;
 import com.farneser.weatherviewer.dao.user.IUserDao;
-import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
+import com.farneser.weatherviewer.utils.PasswordUtil;
 import com.farneser.weatherviewer.models.Session;
 import com.farneser.weatherviewer.models.User;
 import jakarta.servlet.http.HttpServletRequest;

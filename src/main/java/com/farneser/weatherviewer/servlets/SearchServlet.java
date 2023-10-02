@@ -1,8 +1,8 @@
 package com.farneser.weatherviewer.servlets;
 
 import com.farneser.weatherviewer.dto.api.LocationResponse;
-import com.farneser.weatherviewer.helpers.factory.CoordinatesFactory;
-import com.farneser.weatherviewer.helpers.parser.ParameterParser;
+import com.farneser.weatherviewer.utils.ParameterParser;
+import com.farneser.weatherviewer.utils.RequestDataParser;
 import com.farneser.weatherviewer.models.Location;
 import com.farneser.weatherviewer.servlets.auth.AuthServlet;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +18,7 @@ public class SearchServlet extends AuthServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        var search = ParameterParser.getString(request, "location");
+        var search = ParameterParser.getStringParam(request, "location");
 
         List<LocationResponse> locationsResponse = new ArrayList<>();
 
@@ -44,9 +44,9 @@ public class SearchServlet extends AuthServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var coordinates = CoordinatesFactory.getCoordinates(req);
+        var coordinates = RequestDataParser.getCoordinates(req);
 
-        var search = ParameterParser.getString(req, "search_field");
+        var search = ParameterParser.getStringParam(req, "search_field");
 
         var location = locationDao.getByCoordinates(coordinates.getLat(), coordinates.getLon(), session.getUser().getId());
 

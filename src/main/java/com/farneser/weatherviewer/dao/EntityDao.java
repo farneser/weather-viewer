@@ -1,6 +1,6 @@
 package com.farneser.weatherviewer.dao;
 
-import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
+import com.farneser.weatherviewer.factory.HibernateFactory;
 import org.hibernate.Transaction;
 
 import java.util.Arrays;

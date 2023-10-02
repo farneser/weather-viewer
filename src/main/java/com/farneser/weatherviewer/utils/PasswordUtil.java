@@ -1,4 +1,4 @@
-package com.farneser.weatherviewer.helpers.utils;
+package com.farneser.weatherviewer.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -13,9 +13,7 @@ public abstract class PasswordUtil {
             var md = MessageDigest.getInstance("SHA-512");
 
             var passwordBytes = password.getBytes();
-
             var hashBytes = md.digest(passwordBytes);
-
             var bigInt = new BigInteger(1, hashBytes);
             var hashedPassword = new StringBuilder(bigInt.toString(16));
 

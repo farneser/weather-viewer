@@ -1,8 +1,8 @@
 package com.farneser.weatherviewer.listeners;
 
-import com.farneser.weatherviewer.helpers.factory.ApiUriFactory;
-import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
-import com.farneser.weatherviewer.helpers.factory.ThymeleafFactory;
+import com.farneser.weatherviewer.factory.ApiUriFactory;
+import com.farneser.weatherviewer.factory.HibernateFactory;
+import com.farneser.weatherviewer.factory.ThymeleafFactory;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;

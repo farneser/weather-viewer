@@ -2,7 +2,7 @@ package com.farneser.weatherviewer.servlets;
 
 import com.farneser.weatherviewer.dto.api.WeatherResponse;
 import com.farneser.weatherviewer.dto.api.weather.Coordinates;
-import com.farneser.weatherviewer.helpers.factory.CoordinatesFactory;
+import com.farneser.weatherviewer.utils.RequestDataParser;
 import com.farneser.weatherviewer.servlets.auth.AuthServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,7 +38,7 @@ public class HomeServlet extends AuthServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var coordinates = CoordinatesFactory.getCoordinates(req);
+        var coordinates = RequestDataParser.getCoordinates(req);
 
         var location = locationDao.getByCoordinates(
                 coordinates.getLat(),

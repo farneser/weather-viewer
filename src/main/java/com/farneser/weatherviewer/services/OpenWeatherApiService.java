@@ -2,7 +2,7 @@ package com.farneser.weatherviewer.services;
 
 import com.farneser.weatherviewer.dto.api.LocationResponse;
 import com.farneser.weatherviewer.dto.api.WeatherResponse;
-import com.farneser.weatherviewer.helpers.factory.ApiUriFactory;
+import com.farneser.weatherviewer.factory.ApiUriFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -37,7 +37,7 @@ public class OpenWeatherApiService {
 
     public List<LocationResponse> getLocationsByName(String locationName) {
         try {
-            var request = buildRequest(ApiUriFactory.buildDirect(locationName));
+            var request = buildRequest(ApiUriFactory.buildDirectUri(locationName));
 
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -55,7 +55,7 @@ public class OpenWeatherApiService {
 
     public WeatherResponse getWeatherByLocation(double lat, double lon) {
         try {
-            var request = buildRequest(ApiUriFactory.buildWeather(lat, lon));
+            var request = buildRequest(ApiUriFactory.buildWeatherUri(lat, lon));
 
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 

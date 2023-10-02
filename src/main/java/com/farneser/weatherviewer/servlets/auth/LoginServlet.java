@@ -1,9 +1,9 @@
 package com.farneser.weatherviewer.servlets.auth;
 
 import com.farneser.weatherviewer.exceptions.ParamNotExistsException;
-import com.farneser.weatherviewer.helpers.factory.UserDtoFactory;
-import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
-import com.farneser.weatherviewer.helpers.utils.SessionUtil;
+import com.farneser.weatherviewer.utils.RequestDataParser;
+import com.farneser.weatherviewer.utils.PasswordUtil;
+import com.farneser.weatherviewer.models.Session;
 import com.farneser.weatherviewer.models.User;
 import com.farneser.weatherviewer.servlets.BaseServlet;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 @WebServlet(name = "Login page", urlPatterns = "/login")
 public class LoginServlet extends BaseServlet {
@@ -25,7 +27,7 @@ public class LoginServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         try {
-                var loginDto = UserDtoFactory.getLogin(request);
+                var loginDto = RequestDataParser.getLoginDto(request);
 
             User user = null;
 
@@ -46,7 +48,7 @@ public class LoginServlet extends BaseServlet {
 
             sessionDao.cleanUserSessions(user.getId());
 
-            var session = SessionUtil.build(user);
+            var session = buildSession(user);
 
             session = sessionDao.create(session);
 
@@ -61,5 +63,21 @@ public class LoginServlet extends BaseServlet {
             context.setVariable("errorMessage", e.getMessage());
             templateEngine.process("login", context, response.getWriter());
         }
+    }
+
+    protected Session buildSession(User user) {
+        var session = new Session();
+
+        session.setUser(user);
+
+        var calendar = Calendar.getInstance();
+
+        calendar.setTime(new Date());
+
+        calendar.add(Calendar.HOUR_OF_DAY, 24);
+
+        session.setExpiresAt(calendar.getTime());
+
+        return session;
     }
 }

@@ -1,4 +1,4 @@
-package com.farneser.weatherviewer.helpers.factory;
+package com.farneser.weatherviewer.factory;
 
 import com.farneser.weatherviewer.models.Location;
 import com.farneser.weatherviewer.models.Session;

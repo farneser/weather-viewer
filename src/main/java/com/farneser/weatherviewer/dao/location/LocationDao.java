@@ -1,7 +1,7 @@
 package com.farneser.weatherviewer.dao.location;
 
 import com.farneser.weatherviewer.dao.EntityDao;
-import com.farneser.weatherviewer.helpers.factory.HibernateFactory;
+import com.farneser.weatherviewer.factory.HibernateFactory;
 import com.farneser.weatherviewer.models.Location;
 
 import java.util.List;
@@ -31,6 +31,10 @@ public class LocationDao extends EntityDao<Location, Integer> implements ILocati
         }
     }
 
+    /**
+     * @param userId defines ID of the user whose location we want to get
+     * @return list of user locations
+     */
     @Override
     public List<Location> getByUserId(int userId) {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {

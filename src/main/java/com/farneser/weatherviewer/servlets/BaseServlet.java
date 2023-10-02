@@ -6,7 +6,7 @@ import com.farneser.weatherviewer.dao.session.ISessionDao;
 import com.farneser.weatherviewer.dao.session.SessionDao;
 import com.farneser.weatherviewer.dao.user.IUserDao;
 import com.farneser.weatherviewer.dao.user.UserDao;
-import com.farneser.weatherviewer.helpers.factory.ThymeleafFactory;
+import com.farneser.weatherviewer.factory.ThymeleafFactory;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

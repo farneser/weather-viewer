@@ -1,23 +1,31 @@
-package com.farneser.weatherviewer.helpers.factory;
+package com.farneser.weatherviewer.utils;
 
 import com.farneser.weatherviewer.dto.LoginDto;
 import com.farneser.weatherviewer.dto.RegisterDto;
+import com.farneser.weatherviewer.dto.api.weather.Coordinates;
 import com.farneser.weatherviewer.exceptions.ParamNotExistsException;
 import com.farneser.weatherviewer.exceptions.PasswordsNotTheSameException;
-import com.farneser.weatherviewer.helpers.parser.ParameterParser;
 import jakarta.servlet.http.HttpServletRequest;
 
-public abstract class UserDtoFactory {
-    public static RegisterDto getRegister(HttpServletRequest request) throws ParamNotExistsException, PasswordsNotTheSameException {
+public abstract class RequestDataParser {
+    public static Coordinates getCoordinates(HttpServletRequest request) {
+        var coordinates = new Coordinates();
+
+        coordinates.setLat(ParameterParser.getDoubleParam(request, "lat"));
+        coordinates.setLon(ParameterParser.getDoubleParam(request, "lon"));
+
+        return coordinates;
+    }
+
+    public static RegisterDto getRegisterDto(HttpServletRequest request) throws ParamNotExistsException, PasswordsNotTheSameException {
         var registerDto = new RegisterDto();
 
-        var loginDto = getLogin(request);
+        var loginDto = getLoginDto(request);
 
         registerDto.setUsername(loginDto.getUsername());
-
         registerDto.setPassword(loginDto.getPassword());
 
-        var confirmPassword = ParameterParser.getString(request, "confirmPassword");
+        var confirmPassword = ParameterParser.getStringParam(request, "confirmPassword");
 
         if (confirmPassword == null || confirmPassword.isEmpty()) {
             throw new ParamNotExistsException("confirmPassword");
@@ -32,10 +40,10 @@ public abstract class UserDtoFactory {
         return registerDto;
     }
 
-    public static LoginDto getLogin(HttpServletRequest request) throws ParamNotExistsException {
+    public static LoginDto getLoginDto(HttpServletRequest request) throws ParamNotExistsException {
         var loginDto = new LoginDto();
 
-        var username = ParameterParser.getString(request, "username");
+        var username = ParameterParser.getStringParam(request, "username");
 
         if (username == null || username.isEmpty()) {
             throw new ParamNotExistsException("username");
@@ -43,7 +51,7 @@ public abstract class UserDtoFactory {
 
         loginDto.setUsername(username);
 
-        var password = ParameterParser.getString(request, "password");
+        var password = ParameterParser.getStringParam(request, "password");
 
         if (password == null || password.isEmpty()) {
             throw new ParamNotExistsException("password");

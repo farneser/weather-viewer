@@ -1,7 +1,6 @@
 package com.farneser.weatherviewer.servlets.auth;
 
 import com.farneser.weatherviewer.dao.user.IUserDao;
-import com.farneser.weatherviewer.dao.user.UserDaoMock;
 import com.farneser.weatherviewer.models.StaticDaoData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -2,8 +2,8 @@ package com.farneser.weatherviewer.servlets.auth;
 
 import com.farneser.weatherviewer.exceptions.ParamNotExistsException;
 import com.farneser.weatherviewer.exceptions.PasswordsNotTheSameException;
-import com.farneser.weatherviewer.helpers.factory.UserDtoFactory;
-import com.farneser.weatherviewer.helpers.utils.PasswordUtil;
+import com.farneser.weatherviewer.utils.RequestDataParser;
+import com.farneser.weatherviewer.utils.PasswordUtil;
 import com.farneser.weatherviewer.models.User;
 import com.farneser.weatherviewer.servlets.BaseServlet;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class RegisterServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         try {
-            var registerDto = UserDtoFactory.getRegister(request);
+            var registerDto = RequestDataParser.getRegisterDto(request);
 
             if (registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
                 var user = new User();

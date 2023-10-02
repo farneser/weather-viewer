@@ -1,6 +1,6 @@
 package com.farneser.weatherviewer.servlets.auth;
 
-import com.farneser.weatherviewer.helpers.factory.ThymeleafFactory;
+import com.farneser.weatherviewer.factory.ThymeleafFactory;
 import com.farneser.weatherviewer.models.Session;
 import com.farneser.weatherviewer.services.OpenWeatherApiService;
 import com.farneser.weatherviewer.servlets.BaseServlet;

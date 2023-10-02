@@ -1,5 +1,7 @@
 package com.farneser.weatherviewer.factory;
 
+import com.farneser.weatherviewer.exceptions.InternalServerException;
+
 import java.net.URI;
 
 public abstract class ApiUriFactory {
@@ -12,15 +14,18 @@ public abstract class ApiUriFactory {
         ApiUriFactory.apiKey = apiKey;
     }
 
-    public static URI buildDirectUri(String locationName) {
+    public static URI buildDirectUri(String locationName) throws InternalServerException {
         return URI.create(baseUrl + directApiPath + "?q=" + locationName.replace(" ", "+") + "&limit=10" + getApiKeyPath());
     }
 
-    public static URI buildWeatherUri(double latitude, double longitude) {
+    public static URI buildWeatherUri(double latitude, double longitude) throws InternalServerException {
         return URI.create(baseUrl + weatherApiPath + "?lat=" + latitude + "&lon=" + longitude + "&units=metric" + getApiKeyPath());
     }
 
-    private static String getApiKeyPath() {
+    private static String getApiKeyPath() throws InternalServerException {
+        if (apiKey == null){
+            throw new InternalServerException("missing open weather api key");
+        }
         return "&appid=" + apiKey;
     }
 }

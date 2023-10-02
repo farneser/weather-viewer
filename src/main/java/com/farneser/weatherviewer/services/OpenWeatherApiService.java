@@ -2,6 +2,7 @@ package com.farneser.weatherviewer.services;
 
 import com.farneser.weatherviewer.dto.api.LocationResponse;
 import com.farneser.weatherviewer.dto.api.WeatherResponse;
+import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.factory.ApiUriFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,7 +48,7 @@ public class OpenWeatherApiService {
             } else {
                 return new ArrayList<>();
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException | InternalServerException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             return new ArrayList<>();
         }
@@ -64,7 +65,7 @@ public class OpenWeatherApiService {
             } else {
                 return null;
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException | InternalServerException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             return null;
         }

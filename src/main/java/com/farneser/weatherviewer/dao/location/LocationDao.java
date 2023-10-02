@@ -11,13 +11,6 @@ public class LocationDao extends BaseDao<Location, Integer> implements ILocation
         super(Location.class);
     }
 
-    public List<Location> get() {
-        try (var session = HibernateFactory.getSessionFactory().openSession()) {
-
-            return session.createSelectionQuery("FROM Location", Location.class).list();
-        }
-    }
-
     @Override
     public Location getByCoordinates(double lat, double lon, int userId) {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {

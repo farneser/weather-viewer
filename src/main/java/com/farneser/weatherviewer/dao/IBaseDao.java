@@ -8,6 +8,4 @@ public interface IBaseDao<T, K> {
     T getById(K id);
 
     void delete(K id);
-
-    List<T> get();
 }

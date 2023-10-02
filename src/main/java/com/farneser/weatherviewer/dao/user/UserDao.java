@@ -19,12 +19,4 @@ public class UserDao extends BaseDao<User, Integer> implements IUserDao {
                     .uniqueResult();
         }
     }
-
-    @Override
-    public List<User> get() {
-        try (var session = HibernateFactory.getSessionFactory().openSession()) {
-
-            return session.createSelectionQuery("FROM User", User.class).list();
-        }
-    }
 }

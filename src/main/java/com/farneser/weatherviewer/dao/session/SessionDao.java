@@ -13,13 +13,6 @@ public class SessionDao extends BaseDao<Session, UUID> implements ISessionDao {
         super(Session.class);
     }
 
-    public List<Session> get() {
-        try (var session = HibernateFactory.getSessionFactory().openSession()) {
-
-            return session.createSelectionQuery("FROM Session", Session.class).list();
-        }
-    }
-
     public void cleanUserSessions(int userId) {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {
 

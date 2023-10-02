@@ -14,15 +14,17 @@
 
 Конфигурацию базы данных можно настроить не только в environment, а так же и в
 файле [database.properties](src/main/resources/database.properties)
-
-При отсутствии `database.properties` можно прописывать конфигурацию напрямую в `hibernate.cfg.xml`
+При отсутствии `database.properties` можно прописывать конфигурацию напрямую в `hibernate.cfg.xml`, но environment
+параметры базы данных не будут работать
 
 ```keyvalue
 DATABASE_URL=localhost:5432/weather-viewer;
 DATABASE_USERNAME=postgres
 DATABASE_PASSWORD=password;
-WEATHER_DB_NAME_ENV_VARIABLE=your_api_key
+OPENWEATHER_API_KEY=your_api_key
 ```
+
+Ключ апи можно записать в environment `OPENWEATHER_API_KEY` или в файл `config.properties` в параметр `weather_api_key`
 
 ### Запуск через jetty
 

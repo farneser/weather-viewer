@@ -15,6 +15,8 @@
 Конфигурацию базы данных можно настроить не только в environment, а так же и в
 файле [database.properties](src/main/resources/database.properties)
 
+При отсутствии `database.properties` можно прописывать конфигурацию напрямую в `hibernate.cfg.xml`
+
 ```keyvalue
 DATABASE_URL=localhost:5432/weather-viewer;
 DATABASE_USERNAME=postgres

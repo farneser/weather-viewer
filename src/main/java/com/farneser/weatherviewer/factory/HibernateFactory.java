@@ -12,7 +12,6 @@ import org.hibernate.cfg.Configuration;
 
 import java.io.FileInputStream;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -37,22 +36,24 @@ public abstract class HibernateFactory {
 
             var databaseProperties = new Properties();
 
-            var fisUrl = Objects.requireNonNull(HibernateFactory.class.getClassLoader().getResource("database.properties")).toURI().getPath();
-
-            System.out.println(fisUrl);
-
-            databaseProperties.load(new FileInputStream(fisUrl));
+            var resourceUrl = HibernateFactory.class.getClassLoader().getResource("database.properties");
 
             logger.info("started creating configuration");
 
             var configuration = new Configuration()
                     .configure("hibernate.cfg.xml");
 
-            configuration.setProperty("hibernate.connection.url", databaseProperties.getProperty("hibernate.connection.url"));
-            configuration.setProperty("hibernate.connection.username", databaseProperties.getProperty("hibernate.connection.username"));
-            configuration.setProperty("hibernate.connection.password", databaseProperties.getProperty("hibernate.connection.password"));
+            if (resourceUrl != null) {
+                databaseProperties.load(new FileInputStream(resourceUrl.toURI().getPath()));
 
-            if (!databaseProperties.getProperty("use_environment").isEmpty() && databaseProperties.getProperty("use_environment").equalsIgnoreCase("TRUE")) {
+                configuration.setProperty("hibernate.connection.url", databaseProperties.getProperty("hibernate.connection.url"));
+                configuration.setProperty("hibernate.connection.username", databaseProperties.getProperty("hibernate.connection.username"));
+                configuration.setProperty("hibernate.connection.password", databaseProperties.getProperty("hibernate.connection.password"));
+            } else {
+                databaseProperties = configuration.getProperties();
+            }
+
+            if (databaseProperties.getProperty("use_environment") != null && !databaseProperties.getProperty("use_environment").isEmpty() && databaseProperties.getProperty("use_environment").equalsIgnoreCase("TRUE")) {
 
                 if (System.getenv().containsKey("DATABASE_URL")) {
                     configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://" + System.getenv("DATABASE_URL"));

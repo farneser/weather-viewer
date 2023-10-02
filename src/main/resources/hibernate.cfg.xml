@@ -10,6 +10,11 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
+        <!-- I do not recommend using it (completely overlaps the environment)-->
+        <!--<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/weather-viewer</property>-->
+        <!--<property name="hibernate.connection.username">username</property>-->
+        <!--<property name="hibernate.connection.password">password</property>-->
+
         <mapping class="com.farneser.weatherviewer.models.User"/>
         <mapping class="com.farneser.weatherviewer.models.Session"/>
         <mapping class="com.farneser.weatherviewer.models.Location"/>

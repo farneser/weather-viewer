@@ -1,5 +1,6 @@
 package com.farneser.weatherviewer.factory;
 
+import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.models.Location;
 import com.farneser.weatherviewer.models.Session;
 import com.farneser.weatherviewer.models.User;
@@ -9,7 +10,10 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import java.io.FileInputStream;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 public abstract class HibernateFactory {
@@ -31,12 +35,24 @@ public abstract class HibernateFactory {
 
         try {
 
+            var databaseProperties = new Properties();
+
+            var fisUrl = Objects.requireNonNull(HibernateFactory.class.getClassLoader().getResource("database.properties")).toURI().getPath();
+
+            System.out.println(fisUrl);
+
+            databaseProperties.load(new FileInputStream(fisUrl));
+
             logger.info("started creating configuration");
 
             var configuration = new Configuration()
                     .configure("hibernate.cfg.xml");
 
-            if (!configuration.getProperty("use_environment").isEmpty() && configuration.getProperty("use_environment").equalsIgnoreCase("TRUE")) {
+            configuration.setProperty("hibernate.connection.url", databaseProperties.getProperty("hibernate.connection.url"));
+            configuration.setProperty("hibernate.connection.username", databaseProperties.getProperty("hibernate.connection.username"));
+            configuration.setProperty("hibernate.connection.password", databaseProperties.getProperty("hibernate.connection.password"));
+
+            if (!databaseProperties.getProperty("use_environment").isEmpty() && databaseProperties.getProperty("use_environment").equalsIgnoreCase("TRUE")) {
 
                 if (System.getenv().containsKey("DATABASE_URL")) {
                     configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://" + System.getenv("DATABASE_URL"));
@@ -56,6 +72,7 @@ public abstract class HibernateFactory {
             logger.info("hibernate.connection.url : " + configuration.getProperty("hibernate.connection.url"));
             logger.info("hibernate.connection.username : " + configuration.getProperty("hibernate.connection.username"));
             logger.info("hibernate.connection.password : " + configuration.getProperty("hibernate.connection.password"));
+            logger.info("hibernate.connection.driver_class : " + configuration.getProperty("hibernate.connection.driver_class"));
 
             logger.info("started creating registry");
 
@@ -75,28 +92,32 @@ public abstract class HibernateFactory {
 
             logger.info("sources successfully created");
 
-            logger.info("started creating metadata");
+            try {
+                logger.info("started creating metadata");
 
-            var metadata = sources
-                    .getMetadataBuilder()
-                    .build();
+                var metadata = sources
+                        .getMetadataBuilder()
+                        .build();
 
-            logger.info("metadata successfully created");
+                logger.info("metadata successfully created");
 
-            logger.info("started creating session factory");
+                logger.info("started creating session factory");
 
-            sessionFactory = metadata
-                    .getSessionFactoryBuilder()
-                    .build();
+                sessionFactory = metadata
+                        .getSessionFactoryBuilder()
+                        .build();
 
-            logger.info("session factory successfully created");
-
+                logger.info("session factory successfully created");
+            } catch (IllegalStateException e) {
+                throw new InternalServerException("failed to connect the server");
+            }
         } catch (Exception e) {
             shutdown();
 
             logger.warning("failed to create session factory");
 
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            logger.warning(e.getMessage());
+            logger.warning(Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -109,5 +130,9 @@ public abstract class HibernateFactory {
 
             logger.info("registry successfully destroyed");
         }
+    }
+
+    public static void main(String[] args) {
+        HibernateFactory.build();
     }
 }

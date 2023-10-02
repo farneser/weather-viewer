@@ -10,19 +10,6 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <!-- default hibernate confguration-->
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/weather-viewer</property>
-        <property name="hibernate.connection.username">username</property>
-        <property name="hibernate.connection.password">password</property>
-
-        <!-- use environment true or false-->
-        <!--
-            when true, this parameter searches for database configuration
-            parameters in the environment and, if they are absent, substitutes them from this file
-            read more in README.md
-        -->
-        <property name="use_environment">true</property>
-
         <mapping class="com.farneser.weatherviewer.models.User"/>
         <mapping class="com.farneser.weatherviewer.models.Session"/>
         <mapping class="com.farneser.weatherviewer.models.Location"/>

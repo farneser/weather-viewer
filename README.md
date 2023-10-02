@@ -12,7 +12,8 @@
 
 Стандартные значения запуска приложения [параметры необходимо установить свои](#установка-переменных-окружения)
 
-Конфигурацию базы данных можно настроить не только в environment, а так же и в файле [hibernate.cfg.xml](src/main/resources/hibernate.cfg.xml)
+Конфигурацию базы данных можно настроить не только в environment, а так же и в
+файле [database.properties](src/main/resources/database.properties)
 
 ```keyvalue
 DATABASE_URL=localhost:5432/weather-viewer;

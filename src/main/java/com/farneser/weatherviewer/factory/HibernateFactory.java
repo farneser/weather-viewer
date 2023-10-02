@@ -36,48 +36,26 @@ public abstract class HibernateFactory {
             var configuration = new Configuration()
                     .configure("hibernate.cfg.xml");
 
-            var serverIp = "localhost";
+            if (!configuration.getProperty("use_environment").isEmpty() && configuration.getProperty("use_environment").equalsIgnoreCase("TRUE")) {
 
-            if (System.getenv().containsKey("IP_ENV_VARIABLE")) {
-                serverIp = System.getenv("IP_ENV_VARIABLE");
+                if (System.getenv().containsKey("DATABASE_URL")) {
+                    configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://" + System.getenv("DATABASE_URL"));
+                }
+
+                if (System.getenv().containsKey("DATABASE_USERNAME")) {
+                    configuration.setProperty("hibernate.connection.username", System.getenv("DATABASE_USERNAME"));
+                }
+
+                if (System.getenv().containsKey("DATABASE_PASSWORD")) {
+                    configuration.setProperty("hibernate.connection.password", System.getenv("DATABASE_PASSWORD"));
+                }
             }
-
-            var serverPort = "5432";
-
-            if (System.getenv().containsKey("PORT_ENV_VARIABLE")) {
-                serverPort = System.getenv("PORT_ENV_VARIABLE");
-            }
-
-            var serverDbName = "weather-viewer";
-
-            if (System.getenv().containsKey("WEATHER_DB_NAME_ENV_VARIABLE")) {
-                serverDbName = System.getenv("WEATHER_DB_NAME_ENV_VARIABLE");
-            }
-
-            var jdbcConnectionString = "jdbc:postgresql://" + serverIp + ":" + serverPort + "/" + serverDbName;
-
-            configuration.setProperty("hibernate.connection.url", jdbcConnectionString);
-
-            var serverUsername = "postgres";
-
-            if (System.getenv().containsKey("USERNAME_ENV_VARIABLE")) {
-                serverUsername = System.getenv("USERNAME_ENV_VARIABLE");
-            }
-
-            var serverPassword = "postgres";
-
-            if (System.getenv().containsKey("PASSWORD_ENV_VARIABLE")) {
-                serverPassword = System.getenv("PASSWORD_ENV_VARIABLE");
-            }
-
-            configuration.setProperty("hibernate.connection.username", serverUsername);
-            configuration.setProperty("hibernate.connection.password", serverPassword);
 
             logger.info("configuration successfully created");
 
-            logger.info("hibernate.connection.url : " + jdbcConnectionString);
-            logger.info("hibernate.connection.username : " + serverUsername);
-            logger.info("hibernate.connection.password : " + serverPassword);
+            logger.info("hibernate.connection.url : " + configuration.getProperty("hibernate.connection.url"));
+            logger.info("hibernate.connection.username : " + configuration.getProperty("hibernate.connection.username"));
+            logger.info("hibernate.connection.password : " + configuration.getProperty("hibernate.connection.password"));
 
             logger.info("started creating registry");
 

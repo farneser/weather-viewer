@@ -5,7 +5,6 @@ import com.farneser.weatherviewer.factory.HibernateFactory;
 import com.farneser.weatherviewer.models.Session;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 public class SessionDao extends BaseDao<Session, UUID> implements ISessionDao {

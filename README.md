@@ -12,12 +12,12 @@
 
 Стандартные значения запуска приложения [параметры необходимо установить свои](#установка-переменных-окружения)
 
+Конфигурацию базы данных можно настроить не только в environment, а так же и в файле [hibernate.cfg.xml](src/main/resources/hibernate.cfg.xml)
+
 ```keyvalue
-IP_ENV_VARIABLE=localhost
-PORT_ENV_VARIABLE=5432
-WEATHER_DB_NAME_ENV_VARIABLE=weather-viewer
-USERNAME_ENV_VARIABLE=postgres
-PASSWORD_ENV_VARIABLE=postgres
+DATABASE_URL=localhost:5432/weather-viewer;
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=password;
 WEATHER_DB_NAME_ENV_VARIABLE=your_api_key
 ```
 
@@ -34,7 +34,7 @@ cd weather-viewer
 
 ### Ручная сборка и запуск
 
-#### Установка переменных окружения
+#### Установка 
 
 ##### Установка переменных окружения на Linux и MacOS
 

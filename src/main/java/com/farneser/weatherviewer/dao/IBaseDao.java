@@ -1,7 +1,5 @@
 package com.farneser.weatherviewer.dao;
 
-import java.util.List;
-
 public interface IBaseDao<T, K> {
     T create(T entity);
 

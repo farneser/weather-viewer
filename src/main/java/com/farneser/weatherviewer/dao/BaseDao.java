@@ -5,10 +5,10 @@ import org.hibernate.Transaction;
 
 import java.util.Arrays;
 
-public abstract class EntityDao<T, K> {
+public abstract class BaseDao<T, K> {
     protected final Class<T> entityClass;
 
-    public EntityDao(Class<T> entityClass) {
+    public BaseDao(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 

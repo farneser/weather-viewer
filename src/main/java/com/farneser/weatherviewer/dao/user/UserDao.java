@@ -1,12 +1,12 @@
 package com.farneser.weatherviewer.dao.user;
 
-import com.farneser.weatherviewer.dao.EntityDao;
+import com.farneser.weatherviewer.dao.BaseDao;
 import com.farneser.weatherviewer.factory.HibernateFactory;
 import com.farneser.weatherviewer.models.User;
 
 import java.util.List;
 
-public class UserDao extends EntityDao<User, Integer> implements IUserDao {
+public class UserDao extends BaseDao<User, Integer> implements IUserDao {
     public UserDao() {
         super(User.class);
     }

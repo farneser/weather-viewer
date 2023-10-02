@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Locations")
-public class Location implements IEntity<Integer> {
+public class Location implements IBaseModel<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)

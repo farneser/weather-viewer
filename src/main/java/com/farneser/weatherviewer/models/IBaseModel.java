@@ -1,6 +1,6 @@
 package com.farneser.weatherviewer.models;
 
-public interface IEntity<K> {
+public interface IBaseModel<K> {
     K getId();
 
     void setId(K id);

@@ -30,16 +30,7 @@ cd weather-viewer
 ./mnvw jetty:run
 ```
 
-Приложение будет доступно по пути https://localhost:8080/weather-viewer/home
-
-### Запуск через Intellij Idea
-
-1. Открытие панели конфигураций
-2. Выбрать конфигурацию `Tomcat server`
-3. В пункте `Application Server` необходимо указать путь до своего [Tomcat](https://tomcat.apache.org/download-10.cgi)
-   сервера
-4. Перейти на вкладку `Startup/Connection` и установить переменные окружения
-5. Запуск. Проект будет находиться по пути http://localhost:8080/weather_viewer_war_exploded/
+Приложение будет доступно по пути https://localhost:8080/weather-viewer/dashboard
 
 ### Ручная сборка и запуск
 

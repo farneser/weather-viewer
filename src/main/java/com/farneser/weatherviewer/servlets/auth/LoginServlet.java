@@ -1,11 +1,11 @@
 package com.farneser.weatherviewer.servlets.auth;
 
 import com.farneser.weatherviewer.exceptions.ParamNotExistsException;
-import com.farneser.weatherviewer.utils.RequestDataParser;
-import com.farneser.weatherviewer.utils.PasswordUtil;
 import com.farneser.weatherviewer.models.Session;
 import com.farneser.weatherviewer.models.User;
 import com.farneser.weatherviewer.servlets.BaseServlet;
+import com.farneser.weatherviewer.utils.PasswordUtil;
+import com.farneser.weatherviewer.utils.RequestDataParser;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class LoginServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         try {
-                var loginDto = RequestDataParser.getLoginDto(request);
+            var loginDto = RequestDataParser.getLoginDto(request);
 
             User user = null;
 

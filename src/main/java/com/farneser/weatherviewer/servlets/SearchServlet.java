@@ -1,10 +1,10 @@
 package com.farneser.weatherviewer.servlets;
 
 import com.farneser.weatherviewer.dto.api.LocationResponse;
-import com.farneser.weatherviewer.utils.ParameterParser;
-import com.farneser.weatherviewer.utils.RequestDataParser;
 import com.farneser.weatherviewer.models.Location;
 import com.farneser.weatherviewer.servlets.auth.AuthServlet;
+import com.farneser.weatherviewer.utils.ParameterParser;
+import com.farneser.weatherviewer.utils.RequestDataParser;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

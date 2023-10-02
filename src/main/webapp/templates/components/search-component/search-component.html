@@ -2,7 +2,7 @@
     <form class="search-component" method="get" th:action="search">
         <label class="search-label">
             <input class="search-input" id="search-input" name="location" placeholder="Search location"
-                   type="text" th:value="${search_field}">
+                   th:value="${search_field}" type="text">
         </label>
         <button class="search-button" type="submit">Search</button>
     </form>

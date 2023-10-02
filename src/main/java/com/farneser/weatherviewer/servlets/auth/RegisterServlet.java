@@ -2,10 +2,10 @@ package com.farneser.weatherviewer.servlets.auth;
 
 import com.farneser.weatherviewer.exceptions.ParamNotExistsException;
 import com.farneser.weatherviewer.exceptions.PasswordsNotTheSameException;
-import com.farneser.weatherviewer.utils.RequestDataParser;
-import com.farneser.weatherviewer.utils.PasswordUtil;
 import com.farneser.weatherviewer.models.User;
 import com.farneser.weatherviewer.servlets.BaseServlet;
+import com.farneser.weatherviewer.utils.PasswordUtil;
+import com.farneser.weatherviewer.utils.RequestDataParser;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

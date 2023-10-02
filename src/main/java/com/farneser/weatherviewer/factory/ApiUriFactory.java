@@ -23,7 +23,7 @@ public abstract class ApiUriFactory {
     }
 
     private static String getApiKeyPath() throws InternalServerException {
-        if (apiKey == null){
+        if (apiKey == null) {
             throw new InternalServerException("missing open weather api key");
         }
         return "&appid=" + apiKey;

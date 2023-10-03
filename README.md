@@ -2,6 +2,9 @@
 
 [![Java CI with Maven](https://github.com/farneser/weather-viewer/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/weather-viewer/actions/workflows/maven.yml)
 
+Спасибо [github/ibobrov](https://github.com/ibobrov) за issues и обзор кода с указанием ошибок и предложением решения
+Спасибо [github/krios2146](https://github.com/krios2146/) за краткий разбор структуры, нейминга и тестов
+
 ## [Задание](https://zhukovsd.github.io/java-backend-learning-course/Projects/WeatherViewer/)
 
 Веб-приложение для просмотра текущей погоды. Пользователь может зарегистрироваться и добавить в коллекцию один или

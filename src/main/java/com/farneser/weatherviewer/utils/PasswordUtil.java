@@ -5,8 +5,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public abstract class PasswordUtil {
+    private static final Logger logger = Logger.getLogger(PasswordUtil.class.getName());
 
     public static String hashPassword(String password) {
         try {
@@ -25,7 +27,7 @@ public abstract class PasswordUtil {
 
         } catch (NoSuchAlgorithmException e) {
 
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            logger.warning(Arrays.toString(e.getStackTrace()));
             return null;
         }
     }

@@ -16,7 +16,7 @@ public class UserDao extends BaseDao<User, Integer> implements IUserDao {
             return session.createSelectionQuery("FROM User WHERE lower(username) = lower(:username)", User.class)
                     .setParameter("username", username)
                     .uniqueResult();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
     }

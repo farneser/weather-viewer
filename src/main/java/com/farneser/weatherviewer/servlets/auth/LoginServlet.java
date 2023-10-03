@@ -1,5 +1,6 @@
 package com.farneser.weatherviewer.servlets.auth;
 
+import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.exceptions.ParamNotExistsException;
 import com.farneser.weatherviewer.models.Session;
 import com.farneser.weatherviewer.models.User;
@@ -59,7 +60,7 @@ public class LoginServlet extends BaseServlet {
             response.addCookie(cookie);
 
             response.sendRedirect("dashboard");
-        } catch (ParamNotExistsException e) {
+        } catch (ParamNotExistsException | InternalServerException e) {
             context.setVariable("errorMessage", e.getMessage());
             templateEngine.process("login", context, response.getWriter());
         }

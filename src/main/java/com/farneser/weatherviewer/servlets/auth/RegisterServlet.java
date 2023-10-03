@@ -1,5 +1,6 @@
 package com.farneser.weatherviewer.servlets.auth;
 
+import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.exceptions.ParamNotExistsException;
 import com.farneser.weatherviewer.exceptions.PasswordsNotTheSameException;
 import com.farneser.weatherviewer.models.User;
@@ -41,7 +42,7 @@ public class RegisterServlet extends BaseServlet {
         } catch (NullPointerException e) {
             response.sendRedirect("register");
             return;
-        } catch (ParamNotExistsException | PasswordsNotTheSameException e) {
+        } catch (ParamNotExistsException | PasswordsNotTheSameException | InternalServerException e) {
             context.setVariable("errorMessage", e.getMessage());
         } catch (ConstraintViolationException e) {
             context.setVariable("errorMessage", "There is already a user with this name");

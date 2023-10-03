@@ -4,6 +4,7 @@ import com.farneser.weatherviewer.dto.api.LocationResponse;
 import com.farneser.weatherviewer.dto.api.WeatherResponse;
 import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.factory.ApiUriFactory;
+import com.farneser.weatherviewer.listeners.ApplicationContextListener;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -16,9 +17,11 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Getter
 public class OpenWeatherApiService {
+    private final Logger logger = Logger.getLogger(ApplicationContextListener.class.getName());
     private HttpClient client = HttpClient.newHttpClient();
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -49,7 +52,7 @@ public class OpenWeatherApiService {
                 return new ArrayList<>();
             }
         } catch (IOException | InterruptedException | InternalServerException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            logger.warning(Arrays.toString(e.getStackTrace()));
             return new ArrayList<>();
         }
     }
@@ -66,7 +69,7 @@ public class OpenWeatherApiService {
                 return null;
             }
         } catch (IOException | InterruptedException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            logger.warning(Arrays.toString(e.getStackTrace()));
             throw new InternalServerException("api service internal exception");
         }
     }

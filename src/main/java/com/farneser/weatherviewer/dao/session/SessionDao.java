@@ -7,8 +7,11 @@ import com.farneser.weatherviewer.models.Session;
 
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public class SessionDao extends BaseDao<Session, UUID> implements ISessionDao {
+    private final Logger logger = Logger.getLogger(SessionDao.class.getName());
+
     public SessionDao() {
         super(Session.class);
     }
@@ -33,9 +36,9 @@ public class SessionDao extends BaseDao<Session, UUID> implements ISessionDao {
                     transaction.rollback();
                 }
 
-                System.out.println(Arrays.toString(e.getStackTrace()));
+                logger.warning(Arrays.toString(e.getStackTrace()));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
     }

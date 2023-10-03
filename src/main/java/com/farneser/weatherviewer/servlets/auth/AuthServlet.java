@@ -11,8 +11,10 @@ import jakarta.ws.rs.NotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Logger;
 
 public abstract class AuthServlet extends BaseServlet {
+    private final Logger logger = Logger.getLogger(AuthServlet.class.getName());
     protected OpenWeatherApiService apiService = new OpenWeatherApiService();
     protected Session session;
 
@@ -36,11 +38,10 @@ public abstract class AuthServlet extends BaseServlet {
 
             throw new NotFoundException();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            logger.warning(e.getMessage());
+            logger.warning(Arrays.toString(e.getStackTrace()));
 
             resp.sendRedirect("login");
         }
-
     }
 }

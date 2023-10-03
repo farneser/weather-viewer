@@ -22,7 +22,7 @@ public class LocationDao extends BaseDao<Location, Integer> implements ILocation
                     .setParameter("lon", lon)
                     .setParameter("userId", userId)
                     .uniqueResult();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
     }
@@ -39,7 +39,7 @@ public class LocationDao extends BaseDao<Location, Integer> implements ILocation
                     .createSelectionQuery("FROM Location WHERE user.id = :userId", Location.class)
                     .setParameter("userId", userId)
                     .list();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
     }

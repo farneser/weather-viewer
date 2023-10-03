@@ -5,9 +5,11 @@ import com.farneser.weatherviewer.factory.HibernateFactory;
 import org.hibernate.Transaction;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 public abstract class BaseDao<T, K> {
     protected final Class<T> entityClass;
+    private final Logger logger = Logger.getLogger(BaseDao.class.getName());
 
     public BaseDao(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -31,12 +33,12 @@ public abstract class BaseDao<T, K> {
                     transaction.rollback();
                 }
 
-                System.out.println(e.getMessage());
-                System.out.println(Arrays.toString(e.getStackTrace()));
+                logger.warning(e.getMessage());
+                logger.warning(Arrays.toString(e.getStackTrace()));
 
                 throw new RuntimeException(e);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
     }
@@ -44,7 +46,7 @@ public abstract class BaseDao<T, K> {
     public T getById(K id) throws InternalServerException {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {
             return session.get(entityClass, id);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
     }
@@ -61,7 +63,7 @@ public abstract class BaseDao<T, K> {
             }
 
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
     }

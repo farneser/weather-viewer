@@ -1,6 +1,7 @@
 package com.farneser.weatherviewer.dao.session;
 
 import com.farneser.weatherviewer.dao.BaseDao;
+import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.factory.HibernateFactory;
 import com.farneser.weatherviewer.models.Session;
 
@@ -12,7 +13,7 @@ public class SessionDao extends BaseDao<Session, UUID> implements ISessionDao {
         super(Session.class);
     }
 
-    public void cleanUserSessions(int userId) {
+    public void cleanUserSessions(int userId) throws InternalServerException {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
             var transaction = session.beginTransaction();
@@ -34,6 +35,8 @@ public class SessionDao extends BaseDao<Session, UUID> implements ISessionDao {
 
                 System.out.println(Arrays.toString(e.getStackTrace()));
             }
+        }catch (Exception e){
+            throw new InternalServerException(e.getMessage());
         }
     }
 }

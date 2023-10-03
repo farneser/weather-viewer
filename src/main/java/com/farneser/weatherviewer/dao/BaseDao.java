@@ -1,5 +1,6 @@
 package com.farneser.weatherviewer.dao;
 
+import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.factory.HibernateFactory;
 import org.hibernate.Transaction;
 
@@ -12,7 +13,7 @@ public abstract class BaseDao<T, K> {
         this.entityClass = entityClass;
     }
 
-    public T create(T entity) {
+    public T create(T entity) throws InternalServerException {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {
 
             Transaction transaction = null;
@@ -35,16 +36,20 @@ public abstract class BaseDao<T, K> {
 
                 throw new RuntimeException(e);
             }
+        }catch (Exception e){
+            throw new InternalServerException(e.getMessage());
         }
     }
 
-    public T getById(K id) {
+    public T getById(K id) throws InternalServerException {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {
             return session.get(entityClass, id);
+        }catch (Exception e){
+            throw new InternalServerException(e.getMessage());
         }
     }
 
-    public void delete(K id) {
+    public void delete(K id) throws InternalServerException {
         try (var session = HibernateFactory.getSessionFactory().openSession()) {
             Transaction transaction;
 
@@ -56,6 +61,8 @@ public abstract class BaseDao<T, K> {
             }
 
             transaction.commit();
+        }catch (Exception e){
+            throw new InternalServerException(e.getMessage());
         }
     }
 }

@@ -54,7 +54,7 @@ public class OpenWeatherApiService {
         }
     }
 
-    public WeatherResponse getWeatherByLocation(double lat, double lon) {
+    public WeatherResponse getWeatherByLocation(double lat, double lon) throws InternalServerException {
         try {
             var request = buildRequest(ApiUriFactory.buildWeatherUri(lat, lon));
 
@@ -65,9 +65,9 @@ public class OpenWeatherApiService {
             } else {
                 return null;
             }
-        } catch (IOException | InterruptedException | InternalServerException e) {
+        } catch (IOException | InterruptedException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
-            return null;
+            throw new InternalServerException("api service internal exception");
         }
     }
 }

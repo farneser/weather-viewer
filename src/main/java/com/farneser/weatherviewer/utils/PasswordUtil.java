@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 public abstract class PasswordUtil {
-    private static final Logger logger = Logger.getLogger(PasswordUtil.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PasswordUtil.class.getName());
 
     public static String hashPassword(String password) {
         try {
@@ -27,7 +27,7 @@ public abstract class PasswordUtil {
 
         } catch (NoSuchAlgorithmException e) {
 
-            logger.warning(Arrays.toString(e.getStackTrace()));
+            LOGGER.warning(Arrays.toString(e.getStackTrace()));
             return null;
         }
     }

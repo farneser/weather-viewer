@@ -21,7 +21,7 @@ public class LogoutServlet extends BaseServlet {
 
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals(authCookieName)) {
+                    if (cookie.getName().equals(AUTH_COOKIE_NAME)) {
                         cookie.setMaxAge(0);
                         resp.addCookie(cookie);
                         break;

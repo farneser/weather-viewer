@@ -53,7 +53,7 @@ public class LoginServlet extends BaseServlet {
 
             session = sessionDao.create(session);
 
-            var cookie = new Cookie(authCookieName, session.getId().toString());
+            var cookie = new Cookie(AUTH_COOKIE_NAME, session.getId().toString());
 
             cookie.setMaxAge((int) ((session.getExpiresAt().getTime() - System.currentTimeMillis()) / 1000));
 

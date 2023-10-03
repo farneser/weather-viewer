@@ -20,8 +20,6 @@ public class HomeServlet extends AuthServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-
-
             var cities = new ArrayList<WeatherResponse>();
 
             var locations = locationDao.getByUserId(session.getUser().getId());
@@ -66,7 +64,6 @@ public class HomeServlet extends AuthServlet {
                     coordinates.getLat(),
                     coordinates.getLon(),
                     session.getUser().getId());
-
 
             if (location != null) {
                 locationDao.delete(location.getId());

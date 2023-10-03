@@ -53,8 +53,6 @@ public class SearchServlet extends AuthServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-
-
             var coordinates = RequestDataParser.getCoordinates(req);
 
             var search = ParameterParser.getStringParam(req, "search_field");

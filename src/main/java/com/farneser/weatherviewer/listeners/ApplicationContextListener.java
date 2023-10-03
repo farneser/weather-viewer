@@ -8,8 +8,6 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
-import java.io.FileInputStream;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 @WebListener("/")
@@ -23,7 +21,7 @@ public class ApplicationContextListener implements ServletContextListener {
         HibernateFactory.build();
 
         try {
-            ApiUriFactory.build(getApiKey());
+            ApiUriFactory.build(ApiUriFactory.getApiKey());
         } catch (InternalServerException e) {
             logger.warning("failed to build api url factory. cannot find api key");
         }
@@ -40,27 +38,5 @@ public class ApplicationContextListener implements ServletContextListener {
         logger.info("Hibernate session successfully closed");
 
         logger.info("Destroying the server");
-    }
-
-    private String getApiKey() throws InternalServerException {
-        var apiKey = System.getenv("OPENWEATHER_API_KEY");
-
-        if (apiKey == null || apiKey.isEmpty()) {
-            var properties = new Properties();
-
-            var resourceUrl = ApplicationContextListener.class.getClassLoader().getResource("config.properties");
-
-            if (resourceUrl != null) {
-                try {
-                    properties.load(new FileInputStream(resourceUrl.toURI().getPath()));
-
-                    apiKey = properties.getProperty("weather_api_key");
-                } catch (Exception e) {
-                    throw new InternalServerException("invalid api key");
-                }
-            }
-        }
-
-        return apiKey;
     }
 }

@@ -1,8 +1,11 @@
 package com.farneser.weatherviewer.factory;
 
 import com.farneser.weatherviewer.exceptions.InternalServerException;
+import com.farneser.weatherviewer.listeners.ApplicationContextListener;
 
+import java.io.FileInputStream;
 import java.net.URI;
+import java.util.Properties;
 
 public abstract class ApiUriFactory {
     private static final String baseUrl = "https://api.openweathermap.org";
@@ -27,5 +30,27 @@ public abstract class ApiUriFactory {
             throw new InternalServerException("missing open weather api key");
         }
         return "&appid=" + apiKey;
+    }
+
+    public static String getApiKey() throws InternalServerException {
+        var apiKey = System.getenv("OPENWEATHER_API_KEY");
+
+        if (apiKey == null || apiKey.isEmpty()) {
+            var properties = new Properties();
+
+            var resourceUrl = ApplicationContextListener.class.getClassLoader().getResource("config.properties");
+
+            if (resourceUrl != null) {
+                try {
+                    properties.load(new FileInputStream(resourceUrl.toURI().getPath()));
+
+                    apiKey = properties.getProperty("weather_api_key");
+                } catch (Exception e) {
+                    throw new InternalServerException("invalid api key");
+                }
+            }
+        }
+
+        return apiKey;
     }
 }

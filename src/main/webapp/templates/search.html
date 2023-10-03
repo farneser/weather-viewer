@@ -14,6 +14,8 @@
 
 <div th:replace="components/search-component/search-component.html"></div>
 
+<div th:replace="components/error-message/error-message-component.html"></div>
+
 <div th:if="${locations != null && locations.size() != 0}">
     <div class="location-list">
         <div class="location-card" th:each="location : ${locations}">

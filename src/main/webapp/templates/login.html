@@ -8,9 +8,8 @@
 </head>
 <body>
 <h1 class="login-form__title">Вход</h1>
-<div class="error-container" th:if="${errorMessage != null}">
-    <p th:text="${errorMessage}"></p>
-</div>
+
+<div th:replace="components/error-message/error-message-component.html"></div>
 
 <form class="login-form" method="post" th:action="@{/login}">
 

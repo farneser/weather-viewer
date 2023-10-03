@@ -4,25 +4,16 @@
     font-family: Arial, sans-serif;
 }
 
-.error-container {
-    text-align: center;
-    margin-top: 20px;
-    color: red;
-}
-
-/* Стили для контейнера с сообщением об отсутствии городов */
 .no-cities-container {
     text-align: center;
     margin-top: 20px;
 }
 
-/* Стили для текста сообщения */
 .no-cities-message {
     font-size: 18px;
     color: #333;
 }
 
-/* Стили для ссылки на поиск */
 .no-cities-link {
     font-weight: bold;
     text-decoration: none;

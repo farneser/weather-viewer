@@ -1,6 +1,7 @@
 package com.farneser.weatherviewer.servlets;
 
 import com.farneser.weatherviewer.dto.api.LocationResponse;
+import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.models.Location;
 import com.farneser.weatherviewer.servlets.auth.AuthServlet;
 import com.farneser.weatherviewer.utils.ParameterParser;
@@ -17,7 +18,6 @@ import java.util.List;
 public class SearchServlet extends AuthServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         var search = ParameterParser.getStringParam(request, "location");
 
         List<LocationResponse> locationsResponse = new ArrayList<>();
@@ -26,11 +26,18 @@ public class SearchServlet extends AuthServlet {
             var locations = apiService.getLocationsByName(search);
 
             locations.forEach(locationResponse -> {
-                var locationByCoordinates = locationDao
-                        .getByCoordinates(
-                                locationResponse.getLatitude(),
-                                locationResponse.getLongitude(),
-                                session.getUser().getId());
+                Location locationByCoordinates;
+                try {
+                    locationByCoordinates = locationDao
+                            .getByCoordinates(
+                                    locationResponse.getLatitude(),
+                                    locationResponse.getLongitude(),
+                                    session.getUser().getId());
+                } catch (InternalServerException e) {
+                    context.setVariable("errorMessage", e.getMessage());
+                    return;
+                }
+
                 if (locationByCoordinates == null) {
                     locationsResponse.add(locationResponse);
                 }
@@ -40,31 +47,39 @@ public class SearchServlet extends AuthServlet {
         context.setVariable("search_field", search);
         context.setVariable("locations", locationsResponse);
         templateEngine.process("search", context, response.getWriter());
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var coordinates = RequestDataParser.getCoordinates(req);
+        try {
 
-        var search = ParameterParser.getStringParam(req, "search_field");
 
-        var location = locationDao.getByCoordinates(coordinates.getLat(), coordinates.getLon(), session.getUser().getId());
+            var coordinates = RequestDataParser.getCoordinates(req);
 
-        if (location == null) {
+            var search = ParameterParser.getStringParam(req, "search_field");
 
-            var locationResponse = apiService.getWeatherByLocation(coordinates.getLat(), coordinates.getLon());
+            var location = locationDao.getByCoordinates(coordinates.getLat(), coordinates.getLon(), session.getUser().getId());
 
-            location = new Location();
+            if (location == null) {
 
-            location.setUser(sessionDao.getById(getSessionId(req)).getUser());
-            location.setName(locationResponse.getName() + ", " + locationResponse.getSys().getCountry());
-            location.setLatitude(coordinates.getLat());
-            location.setLongitude(coordinates.getLon());
+                var locationResponse = apiService.getWeatherByLocation(coordinates.getLat(), coordinates.getLon());
 
-            locationDao.create(location);
+                location = new Location();
 
-            resp.sendRedirect("?location=" + search);
-            return;
+                location.setUser(sessionDao.getById(getSessionId(req)).getUser());
+                location.setName(locationResponse.getName() + ", " + locationResponse.getSys().getCountry());
+                location.setLatitude(coordinates.getLat());
+                location.setLongitude(coordinates.getLon());
+
+                locationDao.create(location);
+
+                resp.sendRedirect("?location=" + search);
+                return;
+            }
+
+        } catch (InternalServerException e) {
+            context.setVariable("errorMessage", e.getMessage());
         }
 
         templateEngine.process("search", context, resp.getWriter());

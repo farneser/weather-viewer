@@ -14,6 +14,8 @@
 
 <div th:replace="components/search-component/search-component.html"></div>
 
+<div th:replace="components/error-message/error-message-component.html"></div>
+
 <div th:if="${cities != null && cities.size() != 0}">
     <div th:replace="components/weather-component/weather-component.html"></div>
 </div>

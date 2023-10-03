@@ -8,6 +8,7 @@ import com.farneser.weatherviewer.listeners.ApplicationContextListener;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URI;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 public class OpenWeatherApiService {
     private final Logger logger = Logger.getLogger(ApplicationContextListener.class.getName());
     private HttpClient client = HttpClient.newHttpClient();
+    @Setter
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public OpenWeatherApiService() {

@@ -1,12 +1,13 @@
 package com.farneser.weatherviewer.servlets.auth;
 
-import com.farneser.weatherviewer.dao.session.ISessionDao;
-import com.farneser.weatherviewer.dao.user.IUserDao;
-import com.farneser.weatherviewer.utils.PasswordUtil;
+import com.farneser.weatherviewer.dao.session.SessionDao;
+import com.farneser.weatherviewer.dao.user.UserDao;
 import com.farneser.weatherviewer.models.Session;
 import com.farneser.weatherviewer.models.User;
+import com.farneser.weatherviewer.utils.PasswordUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -28,16 +29,21 @@ public class LoginServletTest {
     @Mock
     private HttpServletResponse response;
     @Mock
-    private IUserDao userDao;
-
+    private UserDao userDao;
     @Mock
-    private ISessionDao sessionDao;
+    private SessionDao sessionDao;
     @Captor
     private ArgumentCaptor<String> redirectUrlCaptor;
+    private AutoCloseable closeable;
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        closeable.close();
     }
 
     @Test
@@ -57,17 +63,13 @@ public class LoginServletTest {
         when(sessionDao.create(any(Session.class))).thenReturn(session);
 
         var servlet = new LoginServlet();
+
         servlet.setUserDao(userDao);
         servlet.setSessionDao(sessionDao);
 
         servlet.doPost(request, response);
 
-        verify(response).sendRedirect(redirectUrlCaptor.capture());
-
-        var capturedRedirectUrl = redirectUrlCaptor.getValue();
-        var expectedRedirectUrl = request.getContextPath();
-
-        assertEquals(expectedRedirectUrl, capturedRedirectUrl);
+        verify(response).sendRedirect("dashboard");
     }
 
     @Test

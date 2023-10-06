@@ -3,9 +3,10 @@ package com.farneser.weatherviewer.services;
 import com.farneser.weatherviewer.dto.api.LocationResponse;
 import com.farneser.weatherviewer.dto.api.WeatherResponse;
 import com.farneser.weatherviewer.dto.api.weather.*;
+import com.farneser.weatherviewer.exceptions.InternalServerException;
 import com.farneser.weatherviewer.factory.ApiUriFactory;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -72,51 +73,34 @@ class OpenWeatherApiServiceTest {
             "    \"name\": \"London\",\n" +
             "    \"lat\": 51.5073219,\n" +
             "    \"lon\": -0.1276474,\n" +
-            "    \"country\": \"GB\",\n" +
+            "    \"country\": \"UK\",\n" +
             "    \"state\": \"England\"\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"name\": \"City of London\",\n" +
-            "    \"lat\": 51.5156177,\n" +
-            "    \"lon\": -0.0919983,\n" +
-            "    \"country\": \"GB\",\n" +
-            "    \"state\": \"England\"\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"name\": \"London\",\n" +
-            "    \"lat\": 42.9832406,\n" +
-            "    \"lon\": -81.243372,\n" +
-            "    \"country\": \"CA\",\n" +
-            "    \"state\": \"Ontario\"\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"name\": \"Chelsea\",\n" +
-            "    \"lat\": 51.4875167,\n" +
-            "    \"lon\": -0.1687007,\n" +
-            "    \"country\": \"GB\",\n" +
-            "    \"state\": \"England\"\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"name\": \"London\",\n" +
-            "    \"lat\": 37.1289771,\n" +
-            "    \"lon\": -84.0832646,\n" +
-            "    \"country\": \"US\",\n" +
-            "    \"state\": \"Kentucky\"\n" +
             "  }\n" +
             "]";
     @Mock
     private HttpClient httpClient;
 
-    @Mock
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private OpenWeatherApiService apiService;
 
+    private AutoCloseable closeable;
+
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        ApiUriFactory.build(System.getenv("OPENWEATHERMAP_APIKEY_ENV_VARIABLE"));
+    public void setUp() {
+        closeable = MockitoAnnotations.openMocks(this);
+        try {
+            ApiUriFactory.build(ApiUriFactory.getApiKey());
+        } catch (InternalServerException e) {
+            throw new RuntimeException(e);
+        }
+
         apiService = new OpenWeatherApiService(httpClient, objectMapper);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        closeable.close();
     }
 
     @Test
@@ -124,7 +108,7 @@ class OpenWeatherApiServiceTest {
         // Arrange
         var locationName = "London";
         var expectedResponse = List.of(
-                new LocationResponse("London", 51.5074, -0.1278, "UK")
+                new LocationResponse("London", 51.5073219, -0.1276474, "UK")
         );
 
         var response = Mockito.mock(HttpResponse.class);
@@ -134,9 +118,6 @@ class OpenWeatherApiServiceTest {
 
         when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
                 .thenReturn(response);
-
-        when(objectMapper.readValue(any(String.class), any(TypeReference.class)))
-                .thenReturn(expectedResponse);
 
         var actualResponse = apiService.getLocationsByName(locationName);
 
@@ -159,7 +140,7 @@ class OpenWeatherApiServiceTest {
 
         expectedResponse.setBase("stations");
 
-        expectedResponse.setMain(new Main(15.86, 15.62, 14.38, 17.07, 1020, 81, 10000, -1));
+        expectedResponse.setMain(new Main(15.86, 15.62, 14.38, 17.07, 1020, 81, 0, 0));
 
         expectedResponse.setVisibility(10000);
 
@@ -173,7 +154,6 @@ class OpenWeatherApiServiceTest {
 
         expectedResponse.setSys(new Sys("GB", 1696053522, 1696095747));
 
-
         var response = Mockito.mock(HttpResponse.class);
 
         when(response.statusCode()).thenReturn(200);
@@ -181,10 +161,13 @@ class OpenWeatherApiServiceTest {
 
         when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
                 .thenReturn(response);
-        when(objectMapper.readValue(any(String.class), any(Class.class)))
-                .thenReturn(expectedResponse);
 
-        var actualResponse = apiService.getWeatherByLocation(lat, lon);
+        WeatherResponse actualResponse = null;
+        try {
+            actualResponse = apiService.getWeatherByLocation(lat, lon);
+        } catch (InternalServerException e) {
+            // FIXME: 10/3/23 
+        }
 
         assertEquals(expectedResponse, actualResponse);
     }

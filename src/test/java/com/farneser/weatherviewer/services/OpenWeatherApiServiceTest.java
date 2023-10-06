@@ -18,12 +18,15 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class OpenWeatherApiServiceTest {
+    private final Logger logger = Logger.getLogger(OpenWeatherApiServiceTest.class.getName());
+
     private static final String weatherResponseBody = "{\n" +
             "  \"coord\": {\n" +
             "    \"lon\": -0.1276,\n" +
@@ -166,7 +169,7 @@ class OpenWeatherApiServiceTest {
         try {
             actualResponse = apiService.getWeatherByLocation(lat, lon);
         } catch (InternalServerException e) {
-            // FIXME: 10/3/23 
+            logger.warning(e.getMessage());
         }
 
         assertEquals(expectedResponse, actualResponse);

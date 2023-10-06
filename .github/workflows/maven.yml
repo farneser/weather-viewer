@@ -25,3 +25,8 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Run tests
         run: mvn test
+      - name: Store artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: output/weather-viewer.war

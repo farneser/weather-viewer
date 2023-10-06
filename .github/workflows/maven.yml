@@ -28,5 +28,5 @@ jobs:
       - name: Store artifact
         uses: actions/upload-artifact@v3
         with:
-          name: code-coverage-report
+          name: Weather viewer war build
           path: target/weather-viewer-1.0.war
